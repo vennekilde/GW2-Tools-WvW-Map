@@ -1,0 +1,150 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 6, 2017, 4:10:53 AM
+    Author     : Jeppe Boysen Vennekilde
+*/
+
+#wvw-details{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.wvw-component {
+    display: inline-block;
+    padding: 0px 5px;
+    position: relative;
+    vertical-align: top; /* here */
+}
+
+.wvw-spacer {
+    width: 4px;
+    margin: 0px 14px;
+    height: 100%;
+    background: #414141;
+    display: inline-block;
+}
+
+.wvw-label {
+    color: #a3a3a3;
+}
+.wvw-score-bar-outer .wvw-label {
+    width: 30px;
+    display: inline-block;
+}
+.wvw-canvas-holder {
+    background-image: url(images/blackGlobe.png);
+}
+.wvw-canvas-holder {
+    position: absolute;
+}
+.wvw-canvas-holder-inner {
+    width: 117px;
+    height: 117px;
+}
+.wvw-canvas-holder {
+    background-size: 58px;
+    background-position: -4px -4px;
+    background-repeat: no-repeat;
+    /*background-size: 58px;
+    background-position: 2px 2px;
+    background-repeat: no-repeat;
+    padding: 6px;*/
+}
+
+.wvw-canvas-holder2 {
+    height: 50px;
+    width: 50px;
+}
+
+
+
+.wvw-ppt-container{
+    position: absolute;
+    left: 148px;
+    top: 0px;
+}
+.wvw-ppt-container{
+    padding-top: 5px;
+}
+
+.wvw-ppt-number{
+    min-width: 24px;
+}
+
+.wvw-score-bar-outer {
+    position: relative;
+}
+.wvw-score-bar-outer {
+    position: relative;
+}
+.wvw-score-bar-base {
+    background-color: gray;
+    border-radius: 3px;
+    height: 11px;
+}
+
+.wvw-score-bar-base, .wvw-score-bar {
+    color: gray;
+}
+.wvw-score-bar-base {
+    width: 120px;
+    margin: 3px 2px 2px 0px;
+    float: left;
+    margin-right: 7px;
+}
+.wvw-score-bar-base{
+    width: 120px;    
+    display: inline-block;
+}
+.wvw-score-bar{
+    height: 11px;
+    border-radius: 3px;
+}
+.wvw-score-bar {
+    width: 0px;
+}
+.wvw-score-bar {
+    /*float: right;*/
+}
+.wvw-score-bar-server-name {
+    position: absolute;
+    line-height: 18px;
+    color: white;
+    font-size: 10px;
+    padding-right: 3px;
+    right: 0;
+    z-index: 100;
+    top: 0;
+}
+.wvw-score-bar-server-name {
+    
+}
+.wvw-score-bar-server-name {
+    left: 3px;
+}
+
+.red {
+    color: #B02822;
+}
+.red-bg {
+    background-color: #B02822;
+}
+
+.blue-bg {
+    background-color: #1A4DA1;
+}
+.blue {
+    color: #3573da;
+}
+
+.green {
+    color: #1E7B2D;
+}
+.green-bg {
+    background-color: #1E7B2D;
+}

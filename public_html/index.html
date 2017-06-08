@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+        <script src='map.js'></script>
+        <script src='details.js'></script>
+        <script src='Chart.min.js'></script>
+        <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js'></script>
+        <link rel='stylesheet' type='text/css' href='style.css'>
+        <link rel='stylesheet' type='text/css' href='details.css'>
+    </head>
+    <body>
+        <div id="map"></div>
+        <div id="wvw-details">
+            <div style="padding: 5px;height: 100%;">
+                <div class="wvw-score wvw-component">
+                    <div class="wvw-label">War Score</div>
+                    <div class="wvw-score-bar-outer">
+                        <div class="wvw-score-bar-base">
+                            <div class="wvw-score-green wvw-score-bar green-bg"></div>
+                        </div>
+                        <div class="wvw-score-label-green wvw-label green">-</div>
+                        <div class="wvw-score-bar-text-green wvw-score-bar-server-name"></div>
+                    </div>
+                    <div class="wvw-score-bar-outer">
+                        <div class="wvw-score-bar-base">
+                            <div class="wvw-score-blue wvw-score-bar blue-bg"></div>
+                        </div>
+                        <div class="wvw-score-label-blue wvw-label blue">-</div>
+                        <div class="wvw-score-bar-text-blue wvw-score-bar-server-name"></div>
+                    </div>
+                    <div class="wvw-score-bar-outer">
+                        <div class="wvw-score-bar-base">
+                            <div class="wvw-score-red wvw-score-bar red-bg"></div>
+                        </div>
+                        <div class="wvw-score-label-red wvw-label red">-</div>
+                        <div class="wvw-score-bar-text-red wvw-score-bar-server-name"></div>
+                    </div>
+                </div>
+                
+                <div class="wvw-score-difference wvw-component">
+                    <div class="wvw-label">Difference</div>
+                    <div class="wvw-score-diff-number-green wvw-ppt-number green">-</div>
+                    <div class="wvw-score-diff-number-blue wvw-ppt-number blue">-</div>
+                    <div class="wvw-score-diff-number-red wvw-ppt-number red">-</div>
+                </div>
+                
+                <div class="wvw-spacer"></div>
+                
+                <div class="wvw-component">
+                    <div class="wvw-label">Point Per Tick</div>
+                    <div>
+                        <div class="wvw-canvas-holder">
+                            <div class="wvw-canvas-holder2">
+                                <canvas class="wvw-ppt-canvas" width="50" height="50"></canvas>
+                            </div>
+                        </div>
+                        <div style="padding-left: 60px">
+                            <!--<div class="wvw-label">Tick</div>-->
+                            <div class="wvw-ppt-number-green wvw-ppt-number green">-</div>
+                            <div class="wvw-ppt-number-blue wvw-ppt-number blue">-</div>
+                            <div class="wvw-ppt-number-red wvw-ppt-number red">-</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wvw-spacer"></div>
+                
+                <div class="wvw-component">
+                    <div class="wvw-label">Skirmish Score</div>
+                    <div class="wvw-score-bar-outer">
+                        <div class="wvw-score-bar-base">
+                            <div class="wvw-skirmish-number-green wvw-score-bar green-bg"></div>
+                        </div>
+                        <div class="wvw-skirmish-number-label-green wvw-label green">-</div>
+                        <div class="wvw-score-bar-text-green wvw-score-bar-server-name"></div>
+                    </div>
+                    <div class="wvw-score-bar-outer">
+                        <div class="wvw-score-bar-base">
+                            <div class="wvw-skirmish-number-blue wvw-score-bar blue-bg"></div>
+                        </div>
+                        <div class="wvw-skirmish-number-label-blue wvw-label blue">-</div>
+                        <div class="wvw-score-bar-text-blue wvw-score-bar-server-name"></div>
+                    </div>
+                    <div class="wvw-score-bar-outer">
+                        <div class="wvw-score-bar-base">
+                            <div class="wvw-skirmish-number-red wvw-score-bar red-bg"></div>
+                        </div>
+                        <div class="wvw-skirmish-number-label-red wvw-label red">-</div>
+                        <div class="wvw-score-bar-text-red wvw-score-bar-server-name"></div>
+                    </div>
+                </div>
+                
+                <div class="wvw-score-difference wvw-component">
+                    <div class="wvw-label">Difference</div>
+                    <div class="wvw-skirmish-diff-number-green wvw-ppt-number green">-</div>
+                    <div class="wvw-skirmish-diff-number-blue wvw-ppt-number blue">-</div>
+                    <div class="wvw-skirmish-diff-number-red wvw-ppt-number red">-</div>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,143 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 6, 2017, 12:31:57 AM
+    Author     : Jeppe Boysen Vennekilde
+*/
+html {
+    height: 100%;
+}
+body{
+    margin: 0;
+    height: 100%;
+    
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.leaflet-container {
+    background: #ffffff;
+}
+.leaflet-div-icon{
+    background: transparent;
+    border: none;
+}
+#map {
+    width: 100%;
+    height: calc(100% - 80px);
+}
+
+#wvw-details{
+    height: 80px;
+    background: #272727;
+}
+
+.wvw-obj-marker .www-obj-badge{    
+    border-radius: 13px;
+    background-color: #868686;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 1px 1px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+.wvw-obj-marker, .www-obj-badge{
+    width: 100%;
+    height: 100%;
+}
+
+.wvw-obj-neutral {
+    background-color: #868686;
+}
+.wvw-obj-red, .wvw-obj-Red {
+    background-color: #cc2c21 !important;
+}
+.wvw-obj-blue, .wvw-obj-Blue {
+    background-color: #3b76d6 !important;
+}
+.wvw-obj-green, .wvw-obj-Green {
+    background-color: #1a822b !important;
+}
+
+.cooldown-container{
+    width: 100%;
+    height: 100%;
+    top: -1px;
+    left: -1px;
+    position: absolute;
+}
+
+.cooldown-text{
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    bottom: -15px;
+    width: 100%;
+    text-align: center;
+    text-shadow: -1px 1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.cooldown-border{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    
+    padding: 1px;
+    position: absolute;
+    z-index: -1;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+
+    background-color: gray;
+    background-image:
+        linear-gradient(91deg, transparent 50%, red 50%),
+        linear-gradient(90deg, red 50%, transparent 50%);
+    
+}
+
+.wvw-shield-1, .wvw-shield-2, .wvw-shield-3{
+    width: 8px;
+    height: 8px;
+}
+
+.wvw-shield-1 {
+    position: absolute;
+    top: -3px;
+    left: 0px;
+    background-image: url(images/wvw_shield.png);
+    background-size: 100%;
+}
+.wvw-shield-2 {
+    position: absolute;
+    top: -6px;
+    left: 8px;
+    background-image: url(images/wvw_shield.png);
+    background-size: 100%;
+}
+.wvw-shield-3 {
+    position: absolute;
+    top: -3px;
+    left: 16px;
+    background-image: url(images/wvw_shield.png);
+    background-size: 100%;
+}
+.wvw-waypoint {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background-image: url(images/waypoint.png);
+    background-size: 100%;
+}

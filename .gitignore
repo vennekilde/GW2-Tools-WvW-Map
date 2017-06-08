@@ -1,0 +1,13 @@
+# Netbeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Bower
+bower_components
+
+node_modules
+tmp

@@ -9,7 +9,10 @@
 var imagesLoaded = 0;
 var TOTAL_IMAGES = 6; //const
 
-var installDirectory = "/WvWMap";
+//Attempt to identify installed web path
+var scripts = document.getElementsByTagName('script');
+var path = scripts[scripts.length-1].src.split('?')[0];      // remove any ?query
+var installDirectory = path.split('/').slice(0, -1).join('/')+'/';  // remove last filename part of path
 
 var righteous_indignation_time = 1000 * 60 * 5;
 

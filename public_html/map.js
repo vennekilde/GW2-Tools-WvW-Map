@@ -178,8 +178,8 @@ var markerSize = [markerLength, markerLength];
 var markerAnchor = [markerLength / 2, markerLength / 2];
 
 for (var objectiveType in objectiveTypes) {
-    objectiveType = capitalizeFirstLetter(objectiveType);
-    objectiveTypeToIcon[objectiveType] = L.divIcon({
+    objectiveName = capitalizeFirstLetter(objectiveType);
+    objectiveTypeToIcon[objectiveName] = L.divIcon({
         html:   '<div class="wvw-obj-marker">\n\
                     <div class="cooldown-container" style="display: none;"><div class="cooldown-text"></div><div class="cooldown-border"></div></div>\n\
                     <div class="www-obj-badge" style="background-image: url(images/wvw_'+objectiveType+'.png)"></div>\n\

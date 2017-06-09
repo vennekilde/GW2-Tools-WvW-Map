@@ -305,6 +305,13 @@ function MatchupFetcher() {
                         }
 
                         markerDiv.find(".wvw-shield-container").html(shieldDiv);
+                        
+                        //Draw guild icon if claimed
+                        if(objective.claimed_by !== null){
+                            markerDiv.find(".wvw-guild-icom-marker").show();
+                        } else {
+                            markerDiv.find(".wvw-guild-icom-marker").hide();
+                        }
                     }
                 }
             }

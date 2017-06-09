@@ -217,6 +217,15 @@ function WvWMap() {
                                 icon: icon,
                             }).addTo(self.map);
 
+                            marker.bindPopup("Popup content");
+                            marker.on('mouseover', function (e) {
+                                this.openPopup();
+                            });
+                            marker.on('mouseout', function (e) {
+                                //this.closePopup();
+                            });
+                            
+                            //Save marker for later user
                             self.objMarkers[objective.id] = marker;
                         }
                     }
@@ -237,6 +246,7 @@ function WvWMap() {
                         <div class="cooldown-container" style="display: none;"><div class="cooldown-text"></div><div class="cooldown-border"></div></div>\n\
                         <div class="www-obj-badge" style="background-image: url(images/wvw_' + objectiveType + '.png)"></div>\n\
                         <div class="wvw-shield-container"></div>\n\
+                        <div class="wvw-guild-icom-marker" style="display: none"><img src="'+wvwMapConfig.installDirectory+'/images/guild_shield.png"></div>\n\
                     </div>',
                 //shadowUrl: 'images/waypoint.png',
 

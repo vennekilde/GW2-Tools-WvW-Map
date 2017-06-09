@@ -157,7 +157,7 @@ div {
     height: 16px;
     position: absolute;
     bottom: -5px;
-    right: -5px;
+    left: -5px;
     background-image: url(images/waypoint.png);
     background-size: 100%;
 }

@@ -294,10 +294,10 @@ function MatchupFetcher() {
                         if (objective.yaks_delivered >= 20) {
                             shieldDiv += '<div class="wvw-shield-1"></div>';
                         }
-                        if (objective.yaks_delivered >= 40) {
+                        if (objective.yaks_delivered >= 60) {
                             shieldDiv += '<div class="wvw-shield-2"></div>';
                         }
-                        if (objective.yaks_delivered >= 80) {
+                        if (objective.yaks_delivered >= 140) {
                             shieldDiv += '<div class="wvw-shield-3"></div>';
                             if (objective.type === "Keep" || objective.type === "Castle") {
                                 shieldDiv += '<div class="wvw-waypoint"></div>';

@@ -1,8 +1,15 @@
 {
-    "name": "WvWMap",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "Jeppe Boysen Vennekilde",
-    "contributors": [],
-    "dependencies": {}
+  "name": "WvWMap",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Jeppe Boysen Vennekilde",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {}
 }

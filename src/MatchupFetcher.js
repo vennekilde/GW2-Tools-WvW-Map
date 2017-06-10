@@ -17,7 +17,7 @@ function MatchupFetcher() {
     self.righteous_indignation_time = 1000 * 60 * 5;
     self.matchDetails, self.ppt;
     
-    self.REFRESH_TIME = 100000;
+    self.REFRESH_TIME = 10000;
     
     self.guildDetails = {};
 

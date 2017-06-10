@@ -34,15 +34,11 @@ div {
     margin: 4px;
     color: white;
 }
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: rgba(26, 50, 54, 0.75);
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{
+    background: rgba(26, 50, 54, 0.9);
 }
 .leaflet-popup-content-wrapper {
-    background: rgba(26, 50, 54, 0.75);
     border-radius: 1px;
-}
-.leaflet-popup-close-button {
-    display: none;
 }
 .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
     bottom: 0 !important;
@@ -162,12 +158,34 @@ div {
     background-size: 100%;
 }
 
-.wvw-guild-icom-marker {
+.wvw-guild-icon-marker {
     position: absolute;
     bottom: -10px;
     right: -6px;
     z-index: 5;
 }
-.wvw-guild-icom-marker img{
+.wvw-guild-icon-marker img{
     width: 12px;
+}
+.wvw-objective-name {
+    font-size: 16px;
+    color: #e2b242;
+}
+.claimed-by-img{
+    width: 64px;
+    height: 64px;
+    background: rgba(0, 0, 0, 0.32);
+    border-radius: 8px;
+    margin-right: 6px;
+}
+.wvw-objective-popup-container{
+    display: table;
+    margin-right: 10px;
+}
+.wvw-marker-popup-details, .claimed-by-img{
+    display: table-cell;
+    vertical-align: top;
+}
+.popup-detail{
+    padding-bottom: 2px;
 }

@@ -17,7 +17,9 @@ function MatchupFetcher() {
     self.righteous_indignation_time = 1000 * 60 * 5;
     self.matchDetails, self.ppt;
     
-    self.REFRESH_TIME = 10000;
+    self.REFRESH_TIME = 100000;
+    
+    self.guildDetails = {};
 
     self.updateCircles = {};
 
@@ -273,23 +275,48 @@ function MatchupFetcher() {
                     var objective = objectives[objIndex];
                     var marker = objMarkers[objective.id];
                     if (marker !== undefined) {
-                        var lastFlippedUnixTime = new Date(objective["last_flipped"]).getTime();
-                        var currentTimestamp = new Date().getTime();
-
                         var markerDiv = $(marker._icon);
-                        if (currentTimestamp - lastFlippedUnixTime < self.righteous_indignation_time) {
+                        
+                        var popupHtml = '<div class="wvw-objective-popup"><div class="wvw-objective-name">'+marker.objectiveDetails.name+'</div><div class="wvw-objective-popup-container">';
+                        
+                        //Draw guild icon if claimed
+                        var loadingGuildNameMessage = "Fetching guild name...";
+                        if(objective.claimed_by !== null){
+                            if(!(objective.claimed_by in self.guildDetails)){
+                                self._fetchGuildDetails(objective.claimed_by, self._callbackGuildDetails(marker, loadingGuildNameMessage));
+                            }
+                            
+                            markerDiv.find(".wvw-guild-icon-marker").show();
+                            popupHtml += '<img class="claimed-by-img" src="http://guilds.gw2w2w.com/'+objective.claimed_by+'.svg">';
+                            popupHtml += '<div class="wvw-marker-popup-details popup-detail"><div class="claimed-by">'
+                                    + (objective.claimed_by in self.guildDetails 
+                                        ? "<b>[" + self.guildDetails[objective.claimed_by].tag + "]</b> " + self.guildDetails[objective.claimed_by].name 
+                                        : loadingGuildNameMessage)
+                                    +'</div>';
+                        } else {
+                            markerDiv.find(".wvw-guild-icon-marker").hide();
+                            popupHtml += '<div class="wvw-marker-popup-details">';
+                        }
+                        
+                        var lastFlippedTime = new Date(objective["last_flipped"]).getTime();
+                        var currentTimestamp = new Date().getTime();
+                        var timeSinceFlipped = currentTimestamp - lastFlippedTime;
+                        popupHtml += '<div class="captured-since popup-detail">Flipped ' +self._msToDHMSLossy(timeSinceFlipped)+' ago</div>';
+                        
+                        if (currentTimestamp - lastFlippedTime < self.righteous_indignation_time) {
                             markerDiv.find(".cooldown-container").show();
-                            self.updateCircles[objective.id] = {"flipped": new Date(objective["last_flipped"]).getTime()};
+                            self.updateCircles[objective.id] = {"flipped": lastFlippedTime};
                         } else {
                             markerDiv.find(".cooldown-container").hide();
                             delete self.updateCircles[objective.id];
                         }
 
-                        self._updateCooldownCircle(marker, lastFlippedUnixTime, currentTimestamp, self.righteous_indignation_time);
+                        self._updateCooldownCircle(marker, lastFlippedTime, currentTimestamp, self.righteous_indignation_time);
 
                         markerDiv.find(".www-obj-badge").attr('class', "www-obj-badge wvw-obj-" + objective.owner);
 
                         //Yaks AKA upgrade status
+                        popupHtml += "<div class='popup-detail'>Yaks delivered: "+objective.yaks_delivered+"</div>"
                         var shieldDiv = '';
                         if (objective.yaks_delivered >= 20) {
                             shieldDiv += '<div class="wvw-shield-1"></div>';
@@ -300,22 +327,36 @@ function MatchupFetcher() {
                         if (objective.yaks_delivered >= 140) {
                             shieldDiv += '<div class="wvw-shield-3"></div>';
                             if (objective.type === "Keep" || objective.type === "Castle") {
-                                shieldDiv += '<div class="wvw-waypoint"></div>';
+                                markerDiv.find(".wvw-waypoint").show();
+                            } else {
+                                markerDiv.find(".wvw-waypoint").hide();
                             }
+                        } else {
+                            markerDiv.find(".wvw-waypoint").hide();
                         }
 
                         markerDiv.find(".wvw-shield-container").html(shieldDiv);
                         
-                        //Draw guild icon if claimed
-                        if(objective.claimed_by !== null){
-                            markerDiv.find(".wvw-guild-icom-marker").show();
-                        } else {
-                            markerDiv.find(".wvw-guild-icom-marker").hide();
+                        popupHtml += '<div class="wvw-ppt-ppc-label popup-detail">PPT/PPC: '+objective.points_tick+'</div>';
+                        
+                        popupHtml += "</div></div></div>";
+                        
+                        //Edit marker popup
+                        if(marker.objectiveDetails.name === "Hamm's Lab"){
+                            console.log(marker)
                         }
+                        marker.bindPopup(popupHtml, {autoPan:false, closeButton: false, autoPanPadding: 100});
                     }
                 }
             }
         }
+    };
+    
+    self._callbackGuildDetails = function(marker, replace) {
+        return function(details){
+            self.guildDetails[details.id] = details;
+            marker._popup.setContent(marker._popup.getContent().replace(replace, "<b>[" + details.tag + "]</b> " + details.name));
+        };
     };
 
     /**
@@ -365,7 +406,7 @@ function MatchupFetcher() {
         var borderDiv = markerDiv.find(".cooldown-border");
         var textDiv = markerDiv.find(".cooldown-text");
         //Apply time left label
-        textDiv.text(self._millisToMinutesAndSeconds(cooldownTotal - timeSinceLastFlipped));
+        textDiv.text(self._msToMS(cooldownTotal - timeSinceLastFlipped));
 
         //Draw circle pie circle indicating the time remaining
         var timeLeftColor = "red";
@@ -382,10 +423,90 @@ function MatchupFetcher() {
      * @param {type} millis
      * @returns {String}
      */
-    self._millisToMinutesAndSeconds = function (millis) {
+    self._msToMS = function (millis) {
         var minutes = Math.floor(millis / 60000);
         var seconds = ((millis % 60000) / 1000).toFixed(0);
         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    };
+    
+    self._msToDHMS = function (ms) {
+        var t = self._convertMS(ms);
+        var timeString = "";
+        var first = true;
+        
+        if(t.d !== 0){
+            first = false;
+            timeString += t.d + " day";
+            if(t.d !== 1) timeString += "s";
+        }
+        
+        if(t.h !== 0){
+            if(!first) timeString += ", ";
+            first = false;
+            timeString += t.h + " hour";
+            if(t.h !== 1) timeString += "s";
+        }
+        
+        if(t.m !== 0){
+            if(!first) timeString += ", ";
+            first = false;
+            timeString += t.m + " min";
+            if(t.m !== 1) timeString += "s";
+        }
+        
+        if(t.s !== 0){
+            if(!first) timeString += ", ";
+            first = false;
+            timeString += t.s + " sec";
+            if(t.s !== 1) timeString += "s";
+        }
+        return timeString;
+    };
+    
+    self._msToDHMSLossy = function (milliseconds) {
+        function numberEnding (number) {
+            return (number > 1) ? 's' : '';
+        }
+
+        var temp = Math.floor(milliseconds / 1000);
+        var years = Math.floor(temp / 31536000);
+        if (years) {
+            return years + ' year' + numberEnding(years);
+        }
+        //TODO: Months! Maybe weeks? 
+        var days = Math.floor((temp %= 31536000) / 86400);
+        if (days) {
+            return days + ' day' + numberEnding(days);
+        }
+        var hours = Math.floor((temp %= 86400) / 3600);
+        if (hours) {
+            return hours + ' hour' + numberEnding(hours);
+        }
+        var minutes = Math.floor((temp %= 3600) / 60);
+        if (minutes) {
+            return minutes + ' minute' + numberEnding(minutes);
+        }
+        var seconds = temp % 60;
+        if (seconds) {
+            return seconds + ' second' + numberEnding(seconds);
+        }
+        return 'less than a second'; //'just now' //or other string you like;
+    }
+    
+    self._convertMS = function (ms) {
+        var d, h, m, s;
+        s = Math.floor(ms / 1000);
+        m = Math.floor(s / 60);
+        s = s % 60;
+        h = Math.floor(m / 60);
+        m = m % 60;
+        d = Math.floor(h / 24);
+        h = h % 24;
+        return { d: d, h: h, m: m, s: s };
+    };
+    
+    self._fetchGuildDetails = function(guildId, callback){
+        $.getJSON("https://api.guildwars2.com/v2/guild/"+guildId, callback);
     };
 
     /*

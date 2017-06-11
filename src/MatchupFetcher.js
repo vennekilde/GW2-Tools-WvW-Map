@@ -277,7 +277,13 @@ function MatchupFetcher() {
                     if (marker !== undefined) {
                         var markerDiv = $(marker._icon);
                         
-                        var popupHtml = '<div class="wvw-objective-popup"><div class="wvw-objective-name">'+marker.objectiveDetails.name+'</div><div class="wvw-objective-popup-container">';
+                        var popupHtml = '<div class="wvw-objective-popup">\n\
+                                            <table style="width: 100%"><tr><td class="wvw-objective-name">'+marker.objectiveDetails.name+'</td>\n\
+                                            <td class="objective-header-object" title="Point Per Tick"><div class="objective-ppt-label">'+objective.points_tick+' +</div>\n\
+                                            <img class="objective-ppt" src="'+wvwMapConfig.installDirectory+'/images/ppt.png"></td>\n\
+                                            <td class="objective-header-object" title="Yaks Delivered"><div class="yaks-delivered-label">'+objective.yaks_delivered+'</div>\n\
+                                            <img class="yaks-delivered" src="'+wvwMapConfig.installDirectory+'/images/dolly.png"></td></tr></table>\n\
+                                            <div class="wvw-objective-popup-container">';
                         
                         //Draw guild icon if claimed
                         var loadingGuildNameMessage = "Fetching guild name...";
@@ -288,14 +294,19 @@ function MatchupFetcher() {
                             
                             markerDiv.find(".wvw-guild-icon-marker").show();
                             popupHtml += '<img class="claimed-by-img" src="http://guilds.gw2w2w.com/'+objective.claimed_by+'.svg">';
-                            popupHtml += '<div class="wvw-marker-popup-details popup-detail"><div class="claimed-by">'
+                        } else {
+                            markerDiv.find(".wvw-guild-icon-marker").hide();
+                        }
+                        
+                        popupHtml += '<div class="wvw-marker-popup-details">';
+                        
+                        
+                        if(objective.claimed_by !== null){
+                            popupHtml += '<div class="claimed-by popup-detail">'
                                     + (objective.claimed_by in self.guildDetails 
                                         ? "<b>[" + self.guildDetails[objective.claimed_by].tag + "]</b> " + self.guildDetails[objective.claimed_by].name 
                                         : loadingGuildNameMessage)
                                     +'</div>';
-                        } else {
-                            markerDiv.find(".wvw-guild-icon-marker").hide();
-                            popupHtml += '<div class="wvw-marker-popup-details">';
                         }
                         
                         var lastFlippedTime = new Date(objective["last_flipped"]).getTime();
@@ -315,8 +326,9 @@ function MatchupFetcher() {
 
                         markerDiv.find(".www-obj-badge").attr('class', "www-obj-badge wvw-obj-" + objective.owner);
 
+                        //popupHtml += '<div class="wvw-ppt-ppc-label popup-detail">PPT/PPC: '+objective.points_tick+'</div>';
+                        
                         //Yaks AKA upgrade status
-                        popupHtml += "<div class='popup-detail'>Yaks delivered: "+objective.yaks_delivered+"</div>"
                         var shieldDiv = '';
                         if (objective.yaks_delivered >= 20) {
                             shieldDiv += '<div class="wvw-shield-1"></div>';
@@ -337,7 +349,24 @@ function MatchupFetcher() {
 
                         markerDiv.find(".wvw-shield-container").html(shieldDiv);
                         
-                        popupHtml += '<div class="wvw-ppt-ppc-label popup-detail">PPT/PPC: '+objective.points_tick+'</div>';
+                        //popupHtml += "<div class='popup-detail'>Yaks delivered: "+objective.yaks_delivered+"</div>"
+                        
+                        /*popupHtml += '<div class="popup-detail" style="height: 36px;">\n\
+                                        <div>\n\
+                                            <div style="height: 16px;">\n\
+                                                <img class="obj-tier-1" src="'+wvwMapConfig.installDirectory+'/images/tier1.png">\n\
+                                                <img class="obj-tier-2" src="'+wvwMapConfig.installDirectory+'/images/tier2.png">\n\
+                                                <img class="obj-tier-3" src="'+wvwMapConfig.installDirectory+'/images/tier3.png">\n\
+                                            </div>\n\
+                                            <div class="tier-bar-outer">\n\
+                                                <div class="tier-bar-base tier-3-bar"></div>\n\
+                                                <div class="tier-bar-base tier-2-bar"></div>\n\
+                                                <div class="tier-bar-base tier-1-bar"></div>\n\
+                                                <div class="tier-bar-base tier-bar-progress" style="width: '+((objective.yaks_delivered / 140) * 100) +'%"></div>\n\
+                                                <div class="wvw-score-bar-text-blue wvw-score-bar-server-name">Yaks</div>\n\
+                                            </div>\n\
+                                        </div>\n\
+                                    </div>';*/
                         
                         popupHtml += "</div></div></div>";
                         

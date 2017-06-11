@@ -7,6 +7,16 @@ and open the template in the editor.
     Created on : Jun 6, 2017, 12:31:57 AM
     Author     : Jeppe Boysen Vennekilde
 */
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
 html {
     height: 100%;
 }
@@ -170,6 +180,9 @@ div {
 .wvw-objective-name {
     font-size: 16px;
     color: #e2b242;
+    vertical-align: middle;
+    max-width: 99%;
+    display: inline-table;
 }
 .claimed-by-img{
     width: 64px;
@@ -180,12 +193,91 @@ div {
 }
 .wvw-objective-popup-container{
     display: table;
-    margin-right: 10px;
+    margin-right: 10px;    
+    width: 100%;
+    padding-right: 8px;
 }
 .wvw-marker-popup-details, .claimed-by-img{
-    display: table-cell;
+    display: inline-table;
     vertical-align: top;
 }
 .popup-detail{
     padding-bottom: 2px;
+    position: relative;
+}
+
+.obj-tier-1, .obj-tier-2, .obj-tier-3 {
+    height: 12px;
+}
+
+.tier-bar-outer{
+    position: relative;
+}
+.tier-bar-base{
+    background-color: gray;
+    height: 11px;
+    position: absolute;
+}
+
+.tier-1-bar {
+    width: 14.2857142857%;
+    background: #5e5e5e;
+}
+.tier-2-bar {
+    width: 42.8571428571%;
+    background: #8d8d8d
+}
+.tier-3-bar {
+    width: 100%;
+    background: #b5b5b5
+}
+.tier-bar-progress{
+    background: url(images/progress-bar.png);
+}
+
+.obj-tier-1{
+    position: absolute;
+    left: calc(14.2857142857% - 7px);
+}
+.obj-tier-2{
+    position: absolute;
+    left: calc(42.8571428571% - 7px);
+}
+.obj-tier-3{
+    position: absolute;
+    left: calc(100% - 7px);
+}
+
+.yaks-delivered, .objective-ppt{
+    display: inline-block;
+    height: 16px;
+    margin-top: 2px;
+}
+.yaks-delivered-label, .objective-ppt-label{
+    /*position: absolute;
+    top: 1px;
+    right: 13px;
+    background: #3b3b3b;
+    padding: 1px;
+    font-size: 9px;
+    border-radius: 30px;*/
+    line-height: 22px;
+    display: inline-block;
+}
+.yaks-delivered-label, .objective-ppt-label{
+    padding-right: 3px;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.objective-ppt-label{
+    padding-right: 1px;
+}
+
+.objective-header-object{
+    padding: 1px 6px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.32);
+    border-radius: 5px;
+    margin: 0 1px;
 }

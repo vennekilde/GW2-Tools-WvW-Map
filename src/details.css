@@ -79,9 +79,6 @@ and open the template in the editor.
 .wvw-score-bar-outer {
     position: relative;
 }
-.wvw-score-bar-outer {
-    position: relative;
-}
 .wvw-score-bar-base {
     background-color: gray;
     border-radius: 3px;
@@ -120,9 +117,6 @@ and open the template in the editor.
     right: 0;
     z-index: 100;
     top: 0;
-}
-.wvw-score-bar-server-name {
-    
 }
 .wvw-score-bar-server-name {
     left: 3px;

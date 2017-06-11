@@ -213,8 +213,7 @@ function WvWMap() {
                             var icon = self.objectiveTypeToIcon[objective.type];
                             
                             var marker = L.marker(self._unproject(objective.coord), {
-                                title: objective.name,
-                                icon: icon,
+                                icon: icon
                             }).addTo(self.map);
                             
                             marker.objectiveDetails = objective;
@@ -224,6 +223,21 @@ function WvWMap() {
                             });
                             marker.on('mouseout', function (e) {
                                 this.closePopup();
+                            });
+                            
+                            marker.on('popupopen', function (e) {
+                                var px = self.map.project(e.popup._latlng);
+                                var boundx = self.map.project(self.map.getBounds()._northEast);
+                                var heightOpeningPopup = $('#map').find('.leaflet-popup-content').height();
+                                var temp = px.y - heightOpeningPopup - 20;
+                                
+                                console.log(temp +" - "+boundx.y + " - "+ heightOpeningPopup);
+                                if(temp < boundx.y){ // if it will go above the world, we prevent it to do so
+                                    console.log(e);
+                                    $(e.popup._container).addClass("popup-open-dowm");
+                                } else {
+                                    $(e.popup._container).removeClass("popup-open-dowm");
+                                }
                             });
                             
                             //Save marker for later user

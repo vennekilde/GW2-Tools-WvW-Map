@@ -53,6 +53,18 @@ div {
 .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
     bottom: 0 !important;
 }
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup.popup-open-dowm {
+    top: 25px !important;
+}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup.popup-open-dowm 
+.leaflet-popup-tip-container {
+    top: -10px;
+    height: 10px;
+}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup.popup-open-dowm 
+.leaflet-popup-tip-container .leaflet-popup-tip{
+    margin: 0px auto 0;
+}
 #map {
     width: 100%;
     height: calc(100% - 80px);
@@ -262,12 +274,12 @@ div {
     font-size: 9px;
     border-radius: 30px;*/
     line-height: 22px;
-    display: inline-block;
+    display: inline;
 }
 .yaks-delivered-label, .objective-ppt-label{
     padding-right: 3px;
     font-size: 14px;
-    display: inline-block;
+    display: inline;
     vertical-align: bottom;
 }
 .objective-ppt-label{

@@ -65,15 +65,110 @@ div {
 .leaflet-popup-tip-container .leaflet-popup-tip{
     margin: 0px auto 0;
 }
-#map {
-    width: 100%;
-    height: calc(100% - 80px);
+#wvw-skirmish-score, #wvw-victory-points {
+    min-width: 251px;
+}
+.ui-draggable{
+    direction: ltr;
+    display: table-cell;
+    z-index: 600;
+    cursor: move;
+    cursor: -webkit-grab;
+    background: rgba(26, 50, 54, 0.9);
+    padding: 5px 6px;
+    border-radius: 4px;
+    height: 74px;
+    /*visibility: hidden;*/
+}
+#north-widgets .ui-sortable-placeholder, 
+#south-widgets .ui-sortable-placeholder{
+    display: table-cell;
+    z-index: 600;
+    border-radius: 4px;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 600;
+}
+.ui-droppable-active{
+    background: rgba(0,0,0,0.2);
+    z-index: 900;
+}
+.ui-widget-drop-hover{
+    background: rgba(0, 255, 78, 0.38);
 }
 
-#wvw-details{
-    height: 80px;
-    background: #272727;
+#map {
+    width: 100%;
+    height: 100%;
 }
+#ui-widget-layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#ui-widget-layer-table{
+    height: 100%; 
+    width: 100%;
+    border-spacing: 0;
+}
+#north-widgets, #east-widgets, #west-widgets, #south-widgets{
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+#north-widgets, #south-widgets{
+    height: 73px;
+    max-height: 73px;
+}
+
+#east-widgets, #west-widgets{
+    min-width: 251px;
+    max-width: 251px;
+}
+#east-widgets .ui-draggable, #west-widgets .ui-draggable {
+    display: block;
+    position: relative;
+}
+#north-widgets{
+    vertical-align: top;
+    text-align: left;
+}
+#east-widgets{
+    vertical-align: top;
+    text-align: right;
+    direction: rtl;
+}
+#west-widgets{
+    vertical-align: top;
+    text-align: left;
+}
+#south-widgets{
+    vertical-align: bottom;
+    text-align: left;
+}
+#center-widgets{
+    height: 100%; width: 100%;
+}
+.top-widgets{
+    top: 0;
+    /* text-shadow: 0 0 black; */
+    position: absolute;
+    width: 100%;
+    padding-bottom: 74px;
+}
+.bottom-widgets{
+    bottom: 0;
+    /* text-shadow: 0 0 black; */
+    position: absolute;
+    width: 100%;
+    padding-top: 74px;
+}
+
 
 .wvw-obj-marker .www-obj-badge{    
     border-radius: 13px;
@@ -152,7 +247,6 @@ div {
     left: 0px;
     background-image: url(images/wvw_shield.png);
     background-size: 100%;
-    z-index: 3;
 }
 .wvw-shield-2 {
     position: absolute;
@@ -160,7 +254,6 @@ div {
     left: 8px;
     background-image: url(images/wvw_shield.png);
     background-size: 100%;
-    z-index: 3;
 }
 .wvw-shield-3 {
     position: absolute;
@@ -168,7 +261,6 @@ div {
     left: 16px;
     background-image: url(images/wvw_shield.png);
     background-size: 100%;
-    z-index: 3;
 }
 .wvw-waypoint {
     width: 16px;
@@ -184,7 +276,6 @@ div {
     position: absolute;
     bottom: -10px;
     right: -6px;
-    z-index: 5;
 }
 .wvw-guild-icon-marker img{
     width: 12px;

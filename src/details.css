@@ -19,6 +19,7 @@ and open the template in the editor.
     padding: 0px 5px;
     position: relative;
     vertical-align: top; /* here */
+    text-align: left;
 }
 
 .wvw-spacer {
@@ -30,7 +31,12 @@ and open the template in the editor.
 }
 
 .wvw-label {
-    color: #a3a3a3;
+    color: white;
+    display: inline-block;
+}
+.wvw-label-icon{
+    display: inline-block;
+    height: 10px;
 }
 .wvw-score-bar-outer .wvw-label {
     width: 30px;
@@ -93,10 +99,8 @@ and open the template in the editor.
     margin: 3px 2px 2px 0px;
     float: left;
     margin-right: 7px;
-}
-.wvw-score-bar-base{
-    width: 120px;    
     display: inline-block;
+    position: relative
 }
 .wvw-score-bar{
     height: 11px;
@@ -110,7 +114,7 @@ and open the template in the editor.
 }
 .wvw-score-bar-server-name {
     position: absolute;
-    line-height: 18px;
+    line-height: 10px;
     color: white;
     font-size: 10px;
     padding-right: 3px;
@@ -123,7 +127,7 @@ and open the template in the editor.
 }
 
 .red {
-    color: #B02822;
+    color: #dc4339;
 }
 .red-bg {
     background-color: #B02822;
@@ -133,11 +137,11 @@ and open the template in the editor.
     background-color: #1A4DA1;
 }
 .blue {
-    color: #3573da;
+    color: #4f83da;
 }
 
 .green {
-    color: #1E7B2D;
+    color: #04a81e;
 }
 .green-bg {
     background-color: #1E7B2D;

@@ -251,9 +251,9 @@ function MatchupFetcher() {
         $(".wvw-skirmish-number-label-blue").html(skirmishScore["blue"]);
         $(".wvw-skirmish-number-label-green").html(skirmishScore["green"]);
 
-        $(".wvw-skirmish-diff-number-red").html(skirmishScore["red"] == maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["red"]));
-        $(".wvw-skirmish-diff-number-blue").html(skirmishScore["blue"] == maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["blue"]));
-        $(".wvw-skirmish-diff-number-green").html(skirmishScore["green"] == maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["green"]));
+        $(".wvw-skirmish-diff-number-red").html(skirmishScore["red"] === maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["red"]));
+        $(".wvw-skirmish-diff-number-blue").html(skirmishScore["blue"] === maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["blue"]));
+        $(".wvw-skirmish-diff-number-green").html(skirmishScore["green"] === maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["green"]));
 
         //Draw ppt circle
         for (var i = 0; i < window.wvwPPTCanvases.length; i++) {
@@ -371,9 +371,6 @@ function MatchupFetcher() {
                         popupHtml += "</div></div></div>";
                         
                         //Edit marker popup
-                        if(marker.objectiveDetails.name === "Hamm's Lab"){
-                            console.log(marker)
-                        }
                         marker.bindPopup(popupHtml, {autoPan:false, closeButton: false, autoPanPadding: 100});
                     }
                 }

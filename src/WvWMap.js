@@ -82,8 +82,8 @@ function WvWMap() {
 
 
         // Define viewable area
-        var borderNE = self._unproject([17380, 8900]);
-        var borderSW = self._unproject([3500, 15900]);
+        var borderNE = self._unproject([16700, 8900]);
+        var borderSW = self._unproject([4200, 15900]);
         var bounds = new L.LatLngBounds(borderNE, borderSW);
 
         //Set bounds

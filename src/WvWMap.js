@@ -105,7 +105,8 @@ function WvWMap() {
         }
 
         // Create the event
-        var event = new CustomEvent("wvw-map-initialized", {});
+        var event = document.createEvent("HTMLEvents");
+        event.initEvent("wvw-map-initialized",true,false);
 
         // Dispatch/Trigger/Fire the event
         document.dispatchEvent(event);
@@ -231,9 +232,7 @@ function WvWMap() {
                                 var heightOpeningPopup = $('#map').find('.leaflet-popup-content').height();
                                 var temp = px.y - heightOpeningPopup - 20;
                                 
-                                console.log(temp +" - "+boundx.y + " - "+ heightOpeningPopup);
                                 if(temp < boundx.y){ // if it will go above the world, we prevent it to do so
-                                    console.log(e);
                                     $(e.popup._container).addClass("popup-open-dowm");
                                 } else {
                                     $(e.popup._container).removeClass("popup-open-dowm");

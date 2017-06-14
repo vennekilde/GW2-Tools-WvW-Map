@@ -384,3 +384,20 @@ div {
     border-radius: 5px;
     margin: 0 1px;
 }
+#wvw-kd-eb-widget, #wvw-kd-red-widget,
+#wvw-kd-blue-widget, #wvw-kd-green-widget{
+    border-bottom: solid 5px;
+    padding-bottom: 0px;
+}
+#wvw-kd-eb-widget{
+    border-color: purple;
+}
+#wvw-kd-red-widget{
+    border-color: #B02822;
+}
+#wvw-kd-blue-widget{
+    border-color: #1A4DA1;
+}
+#wvw-kd-green-widget{
+    border-color: #1E7B2D;
+}

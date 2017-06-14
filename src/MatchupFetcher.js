@@ -255,6 +255,19 @@ function MatchupFetcher() {
         $(".wvw-skirmish-diff-number-blue").html(skirmishScore["blue"] === maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["blue"]));
         $(".wvw-skirmish-diff-number-green").html(skirmishScore["green"] === maxSkirmishScore ? "Lead" : "-" + (maxSkirmishScore - skirmishScore["green"]));
 
+        var mapTypeToId = {
+            "Center" : "eb",
+            "RedHome" : "red",
+            "BlueHome" : "blue",
+            "GreenHome" : "green"
+        }
+        //Get combat statistics
+        self._updateCombatWidget("#wvw-kd-widget", self.matchDetails["kills"], self.matchDetails["deaths"]);
+        for (var i = 0; i < self.matchDetails["maps"].length; i++) {
+            var map = self.matchDetails["maps"][i];
+            self._updateCombatWidget("#wvw-kd-"+mapTypeToId[map.type]+"-widget", map["kills"], map["deaths"]);
+        }
+        
         //Draw ppt circle
         for (var i = 0; i < window.wvwPPTCanvases.length; i++) {
             var canvas = window.wvwPPTCanvases[i];
@@ -264,6 +277,21 @@ function MatchupFetcher() {
             canvas.data.datasets[0].data[2] = self.ppt[2];
             canvas.update();
         }
+    };
+    
+    self._updateCombatWidget = function(widgetClass, kills, deaths){
+        var widget = $(widgetClass);
+        widget.find(".wvw-kills-red").html(kills["red"]);
+        widget.find(".wvw-kills-blue").html(kills["blue"]);
+        widget.find(".wvw-kills-green").html(kills["green"]);
+        
+        widget.find(".wvw-deaths-red").html(deaths["red"]);
+        widget.find(".wvw-deaths-blue").html(deaths["blue"]);
+        widget.find(".wvw-deaths-green").html(deaths["green"]);
+        
+        widget.find(".wvw-kd-red").html((kills["red"] / deaths["red"]).toFixed(2));
+        widget.find(".wvw-kd-blue").html((kills["blue"] / deaths["blue"]).toFixed(2));
+        widget.find(".wvw-kd-green").html((kills["green"] / deaths["green"]).toFixed(2));
     }
 
     self._drawMapMarkers = function () {

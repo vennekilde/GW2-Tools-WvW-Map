@@ -307,10 +307,10 @@ function MatchupFetcher() {
                         
                         var popupHtml = '<div class="wvw-objective-popup">\n\
                                             <table style="width: 100%"><tr><td class="wvw-objective-name">'+marker.objectiveDetails.name+'</td>\n\
-                                            <td class="objective-header-object" title="Point Per Tick"><div class="objective-ppt-label">'+objective.points_tick+' +</div>\n\
-                                            <img class="objective-ppt" src="'+wvwMapConfig.installDirectory+'/images/ppt.png"></td>\n\
-                                            <td class="objective-header-object" title="Yaks Delivered"><div class="yaks-delivered-label">'+objective.yaks_delivered+'</div>\n\
-                                            <img class="yaks-delivered" src="'+wvwMapConfig.installDirectory+'/images/dolly.png"></td></tr></table>\n\
+                                            <td class="objective-header-object" title="Point Per Tick"><div><div class="objective-ppt-label">'+objective.points_tick+' +</div>\n\
+                                            <img class="objective-ppt" src="'+wvwMapConfig.installDirectory+'/images/ppt.png"></div></td>\n\
+                                            <td class="objective-header-object" title="Yaks Delivered"><div><div class="yaks-delivered-label">'+objective.yaks_delivered+'</div>\n\
+                                            <img class="yaks-delivered" src="'+wvwMapConfig.installDirectory+'/images/dolly.png"></div></td></tr></table>\n\
                                             <div class="wvw-objective-popup-container">';
                         
                         //Draw guild icon if claimed

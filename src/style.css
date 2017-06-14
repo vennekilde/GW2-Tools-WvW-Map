@@ -326,8 +326,7 @@ south-widgets .ui-sortable-placeholder{
     font-size: 16px;
     color: #e2b242;
     vertical-align: middle;
-    max-width: 99%;
-    display: inline-table;
+    width: 99%;
 }
 .claimed-by-img{
     width: 64px;
@@ -425,6 +424,7 @@ south-widgets .ui-sortable-placeholder{
     background: rgba(0, 0, 0, 0.32);
     border-radius: 5px;
     margin: 0 1px;
+    white-space:nowrap;
 }
 #wvw-kd-eb-widget, #wvw-kd-red-widget,
 #wvw-kd-blue-widget, #wvw-kd-green-widget{

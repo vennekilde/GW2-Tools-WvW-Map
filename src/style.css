@@ -78,11 +78,11 @@ div {
     padding: 5px 6px;
     border-radius: 4px;
     height: 74px;
+    position: relative;
     /*visibility: hidden;*/
 }
-#north-widgets .ui-sortable-placeholder, 
-#south-widgets .ui-sortable-placeholder{
-    display: table-cell;
+north-widgets .ui-sortable-placeholder, 
+south-widgets .ui-sortable-placeholder{
     z-index: 600;
     border-radius: 4px;
     height: 0 !important;
@@ -96,6 +96,9 @@ div {
 .ui-droppable-active{
     background: rgba(0,0,0,0.2);
     z-index: 900;
+}
+#ui-widget-layer.ui-active{
+    z-index: 890;
 }
 .ui-widget-drop-hover{
     background: rgba(0, 255, 78, 0.38);
@@ -116,43 +119,82 @@ div {
     width: 100%;
     border-spacing: 0;
 }
+#north-widgets,  #south-widgets{
+    width: 100%;
+}
 #north-widgets, #east-widgets, #west-widgets, #south-widgets{
     padding: 0;
     margin: 0;
     position: relative;
 }
-#north-widgets, #south-widgets{
-    height: 73px;
-    max-height: 73px;
+.left-panel, .right-panel{
+    height: 74px;
+    max-height: 74px;
+}
+.left-panel{
+    position: relative;
+    display: table;
+    padding-right: 200px;
+}
+.right-panel{
+    right: 0;
+    position: absolute;
+    padding-left: 200px;
+}
+#north-widgets .right-panel{
+    top: 0;
+}
+#south-widgets .right-panel{
+    bottom: 0;
 }
 
-#east-widgets, #west-widgets{
-    min-width: 251px;
-    max-width: 251px;
-}
-#east-widgets .ui-draggable, #west-widgets .ui-draggable {
-    display: block;
+.east-panel, .west-panel{
+    min-width: 200px;
     position: relative;
+}
+.east-panel .ui-draggable, .west-panel .ui-draggable {
+    display: block;
 }
 #north-widgets{
     vertical-align: top;
     text-align: left;
 }
-#east-widgets{
+.east-panel{
+    position: absolute;
     vertical-align: top;
     text-align: right;
     direction: rtl;
+    right: 0;
 }
-#west-widgets{
+.west-panel {
     vertical-align: top;
     text-align: left;
+    display: inline-block;
+}
+#north-widgets .west-panel, 
+#north-widgets .east-panel{
+    padding-bottom: 74px;
+}
+#south-widgets .west-panel, 
+#south-widgets .east-panel{
+    margin-bottom: 74px;
+    padding-top: 74px;
+}
+#north-widgets .east-panel{
+    margin-top: 74px;
+    top: 0;
+}
+#south-widgets .east-panel{
+    bottom: 0;
+}
+#south-widgets .left-panel {
+    bottom: 0;
+    position: absolute;
 }
 #south-widgets{
-    vertical-align: bottom;
-    text-align: left;
-}
-#center-widgets{
-    height: 100%; width: 100%;
+    text-align: left;    
+    bottom: 0;
+    position: absolute;
 }
 .top-widgets{
     top: 0;

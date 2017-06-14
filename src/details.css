@@ -16,7 +16,7 @@ and open the template in the editor.
 
 .wvw-component {
     display: inline-block;
-    padding: 0px 5px;
+    margin-left: 5px;
     position: relative;
     vertical-align: top; /* here */
     text-align: left;
@@ -85,19 +85,17 @@ and open the template in the editor.
 .wvw-score-bar-outer {
     position: relative;
 }
-.wvw-score-bar-base {
-    background-color: gray;
-    border-radius: 3px;
-    height: 11px;
-}
 
 .wvw-score-bar-base, .wvw-score-bar {
     color: gray;
 }
 .wvw-score-bar-base {
+    background-color: gray;
+    border-radius: 3px;
+    height: 11px;
     width: 120px;
-    margin: 3px 2px 2px 0px;
     float: left;
+    margin-top: 2px;
     margin-right: 7px;
     display: inline-block;
     position: relative

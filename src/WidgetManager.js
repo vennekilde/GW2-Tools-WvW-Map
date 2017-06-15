@@ -27,7 +27,7 @@ function WidgetManager(){
             stop: function(event, ui){
                 $( ".ui-droppable" ).removeClass("ui-droppable-active");
                 $( "#ui-widget-layer" ).removeClass("ui-active");
-                setCookie(event.target.id, JSON.stringify(ui.position), 999999999);
+                //setCookie(event.target.id, JSON.stringify(ui.position), 9999);
             }
         });
         $( ".ui-draggable" ).each(function(){
@@ -56,9 +56,31 @@ function WidgetManager(){
             },
             out : function(){
                 $(this).removeClass('ui-widget-drop-hover');
+            },
+            stop: function (event, ui) {
+                $( ".ui-droppable" ).each(function(){
+                    //Use replace []= to - due to - being somewhat wonky with sortable serialize
+                    console.log(this);
+                    var data = $(this).sortable('serialize').replace(/\[\]=/g,"-");
+                    var id = "droppable-" + this.id;
+                    console.log(data);
+                    setCookie(id, data, 9999);
+                });
             }
         }); 
         $(".ui-droppable").disableSelection();
+        
+        $( ".ui-droppable" ).each(function(){
+            var positionStr = getCookie("droppable-"+this.id);
+            console.log(positionStr);
+            if(positionStr){
+                var widgetIds = positionStr.split("&");
+                for (var i=0; i < widgetIds.length; i++) {
+                    console.log("#"+widgetIds[i])
+                     $("#"+widgetIds[i]).appendTo(this);
+                }
+            }
+        });
     };
     
     

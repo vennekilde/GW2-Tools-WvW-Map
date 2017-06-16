@@ -79,6 +79,7 @@ div {
     border-radius: 4px;
     height: 74px;
     position: relative;
+    width: auto !important;
     /*visibility: hidden;*/
 }
 north-widgets .ui-sortable-placeholder, 
@@ -119,6 +120,16 @@ south-widgets .ui-sortable-placeholder{
     width: 100%;
     border-spacing: 0;
 }
+
+#inactive-widgets{
+    width: 100%;
+    float: left;
+    background: rgba(0,0,0,0.2);
+}
+#inactive-widgets.ui-droppable-active{
+    padding-bottom: 74px;
+}
+
 #north-widgets,  #south-widgets{
     width: 100%;
 }
@@ -152,8 +163,18 @@ south-widgets .ui-sortable-placeholder{
     min-width: 200px;
     position: relative;
 }
-.east-panel .ui-draggable, .west-panel .ui-draggable {
-    display: block;
+.east-panel .ui-draggable, 
+.west-panel .ui-draggable,
+.menu-toggle-container .ui-draggable{   
+    display: table; 
+}
+.east-panel .ui-draggable {
+    float: right;
+    clear: right;
+}
+.west-panel .ui-draggable{
+    float: left;
+    clear: left;
 }
 #north-widgets{
     vertical-align: top;

@@ -67,7 +67,10 @@ function WvWMap() {
             bounceAtZoomLimits: false,
             zoomControl: false,
             attributionControl: false,
-        }).setView([1351, 1602], minZoom);
+        });
+        self.map.setView(self._unproject([10450, 12500]), minZoom);
+        
+        
 
         // Define renderable area of the map
         var renderBounds = new L.LatLngBounds(self._unproject([16384, 0]), self._unproject([0, 16384]));
@@ -100,6 +103,9 @@ function WvWMap() {
         if (wvwMapConfig !== undefined && wvwMapConfig.debug) {
             L.marker(borderSW, {title: "sw"}).addTo(self.map);
             L.marker(borderNE, {title: "ne"}).addTo(self.map);
+            L.marker(self.map.getCenter(), {title: "center"}).addTo(self.map);
+            var borderSE = self._unproject([16700, 15900]);
+            L.marker(borderSE, {title: "se"}).addTo(self.map);
 
             self.map.on("click", (self._onMapClick).bind(this));
         }
@@ -192,9 +198,12 @@ function WvWMap() {
      * Change the min zoom on the map to match the new resolution
      * @returns {undefined}
      */
-    self._handleMapSizeChanged = function(){
+    self._handleMapSizeChanged = function(delay){
         var minZoom = self._getMinZoomBasedOnMapSize(mapDiv);
-        self.map.setMinZoom(minZoom);
+        setTimeout(function(){ 
+            self.map.setMinZoom(minZoom);
+            self.map.invalidateSize({animate: true, duration: 1});
+        }, delay);
     }
 
     self._onMapClick = function (e) {

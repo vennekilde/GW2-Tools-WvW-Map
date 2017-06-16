@@ -15,7 +15,7 @@ function WidgetManager(){
     
     self.setupDraggables = function(){
         $( ".ui-draggable" ).draggable({
-            containment: "#map",
+            containment: "body",
             connectToSortable: ".ui-droppable",
             appendTo: 'body',
             revert: 'invalid',
@@ -31,7 +31,7 @@ function WidgetManager(){
             }
         });
         $( ".ui-draggable" ).each(function(){
-            $(this).width($(this).width());
+            //$(this).width($(this).width());
             /*var positionStr = getCookie((this.id));
             if(positionStr !== undefined && positionStr !== null){
                 var position = JSON.parse(positionStr);
@@ -45,11 +45,12 @@ function WidgetManager(){
         $(".ui-droppable").sortable({
             hoverClass: "ui-widget-drop-hover",
             accept: ".ui-draggable",
-            containment: "#map",
+            containment: "body",
             tolerance: "pointer",
+            appendTo: 'body',
             scroll: false,
             start: function(e, ui){
-                //ui.placeholder.height(ui.item.height());
+                ui.placeholder.height(ui.item.height());
             },
             over : function(){
                 $(this).addClass('ui-widget-drop-hover');

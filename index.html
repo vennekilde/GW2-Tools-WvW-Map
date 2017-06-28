@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<!--
+    The MIT License
+
+    Copyright 2017 Jeppe Boysen Vennekilde.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+-->
+<html>
+
+<head>
+    <!DOCTYPE html>
+    <!--
+    The MIT License
+
+    Copyright 2017 Jeppe Boysen Vennekilde.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WvW Live Map</title>
+
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
+    <link type="text/css" rel="stylesheet" href="css/menu-nav.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link type="text/css" rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-indigo.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/utils.js"></script>
+    <script type="text/javascript" src="scripts/nav-helper.js"></script>
+    <script type="text/javascript" src="scripts/menu-nav.js"></script>
+    <script type="text/javascript" src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        /**
+* Copyright 2015 Google Inc. All Rights Reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+        html,
+        body {
+            font-family: 'Roboto', 'Helvetica', sans-serif;
+        }
+
+        .demo-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+        }
+
+        .mdl-layout__drawer .avatar {
+            margin-bottom: 16px;
+        }
+
+        .demo-drawer {
+            border: none;
+        }
+        /* iOS Safari specific workaround */
+
+        .demo-drawer .mdl-menu__container {
+            z-index: -1;
+        }
+
+        .demo-drawer .demo-navigation {
+            z-index: -2;
+        }
+        /* END iOS Safari specific workaround */
+
+        .demo-drawer .mdl-menu .mdl-menu__item {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .demo-drawer-header {
+            box-sizing: border-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            padding: 16px;
+        }
+
+        .demo-avatar-dropdown {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            position: relative;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .demo-navigation {
+            margin-left: 16px !important;
+            /*-webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;*/
+        }
+
+        .demo-layout .demo-navigation .mdl-navigation__link {
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            color: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .demo-layout .demo-navigation .mdl-navigation__link:hover {
+            background-color: #04cd70;
+            /*#00BCD4;*/
+            color: #37474F;
+        }
+
+        .demo-navigation .mdl-navigation__link .material-icons {
+            margin-right: 32px;
+        }
+
+        .demo-content {
+            max-width: 1080px;
+        }
+
+        .demo-charts {
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .demo-chart:nth-child(1) {
+            color: #ACEC00;
+        }
+
+        .demo-chart:nth-child(2) {
+            color: #00BBD6;
+        }
+
+        .demo-chart:nth-child(3) {
+            color: #BA65C9;
+        }
+
+        .demo-chart:nth-child(4) {
+            color: #EF3C79;
+        }
+
+        .demo-graphs {
+            padding: 16px 32px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-align-items: stretch;
+            -ms-flex-align: stretch;
+            align-items: stretch;
+        }
+        /* TODO: Find a proper solution to have the graphs
+     * not float around outside their container in IE10/11.
+     * Using a browserhacks.com solution for now.
+     */
+
+        _:-ms-input-placeholder,
+         :root .demo-graphs {
+            min-height: 664px;
+        }
+
+        _:-ms-input-placeholder,
+         :root .demo-graph {
+            max-height: 300px;
+        }
+        /* TODO end */
+
+        .demo-graph:nth-child(1) {
+            color: #00b9d8;
+        }
+
+        .demo-graph:nth-child(2) {
+            color: #d9006e;
+        }
+
+        .demo-cards {
+            -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -webkit-align-content: flex-start;
+            -ms-flex-line-pack: start;
+            align-content: flex-start;
+        }
+
+        .demo-cards .demo-separator {
+            height: 32px;
+        }
+
+        .demo-cards .mdl-card__title.mdl-card__title {
+            color: white;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .demo-cards ul {
+            padding: 0;
+        }
+
+        .demo-cards h4 {
+            font-size: 1em;
+        }
+
+        .demo-updates .mdl-card__title {
+            min-height: 200px;
+            background-image: url('images/dog.png');
+            background-position: 90% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .demo-cards .mdl-card__actions a {
+            color: #00BCD4;
+            text-decoration: none;
+        }
+
+        .demo-options h4 {
+            margin: 0;
+        }
+
+        .demo-options .mdl-checkbox__box-outline {
+            border-color: rgba(255, 255, 255, 0.89);
+        }
+
+        .demo-options ul {
+            margin: 0;
+            list-style-type: none;
+        }
+
+        .demo-options li {
+            margin: 4px 0;
+        }
+
+        .demo-options .material-icons {
+            color: rgba(255, 255, 255, 0.89);
+        }
+
+        .demo-options .mdl-card__actions {
+            height: 64px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            box-sizing: border-box;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+            padding: 12px 20px;
+        }
+
+        .mdl-layout__header-row {
+            padding: 0 20px 0 30px;
+        }
+    </style>
+
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link type="text/css" rel="stylesheet" href="css/map.css" />
+    <link type="text/css" rel="stylesheet" href="css/map-widgets.css" />
+</head>
+
+<body>
+
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <!-- mdl-layout--fixed-drawer -->
+
+        <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--grey-100">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title" style="font-family: gw2;"><span style="font-weight: bold;color: #DC241F;">GW2</span> Placeholder</span>
+
+                <nav class="demo-navigation mdl-navigation">
+                    <a class="mdl-navigation__link" href="index.html"><i class="material-icons" role="presentation">map</i>Live map</a>
+                    <a class="mdl-navigation__link" href="matchups.html"><i class="material-icons" role="presentation">view_list</i>Matchups</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">show_chart</i>Matchup statistics</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">format_line_spacing</i>Matchup probability</a>
+                </nav>
+                <div class="mdl-layout-spacer"></div>
+                <!--<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" id="search">
+                <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+        </div>-->
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+        </button>
+                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right " for="hdrbtn">
+                    <li class="mdl-menu__item">About</li>
+                    <li class="mdl-menu__item">Contact</li>
+                    <a class="mdl-menu__item" href="legal.html">Legal information</a>
+                </ul>
+            </div>
+        </header>
+
+
+        <main class="mdl-layout__content mdl-color--grey-100">
+
+            <style>
+                #map-sidebar::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                }
+
+                #map-sidebar .wvw-component-title {
+                    text-align: center;
+                    background-color: hsla(200, 18%, 11%, 1) !important;
+                    margin-bottom: 5px;
+                }
+
+                #map-sidebar .sidebar-widget {
+                    margin-bottom: 6px;
+                }
+
+                #map-sidebar .wvw-label-icon {
+                    display: inline-block;
+                    height: 15px;
+                    padding-bottom: 4px;
+                }
+
+                #map-sidebar .wvw-title {
+                    color: white;
+                    display: inline-block;
+                    padding: 10px;
+                    font-size: 16px;
+                }
+
+                #map-sidebar .wvw-ppt-number {
+                    display: inline-block;
+                }
+
+                #map-sidebar .wvw-component {
+                    width: 100%;
+                    line-height: 18px;
+                    margin-left: 0;
+                }
+
+                #map-sidebar .wvw-bar-base {
+                    height: 13px;
+                    float: none;
+                    margin: 0;
+                    display: block;
+                    width: 140px;
+                }
+
+                #map-sidebar .wvw-bar {
+                    height: 13px;
+                }
+
+                #map-sidebar .wvw-bar-outer {
+                    position: relative;
+                    text-align: center;
+                    border-spacing: 0;
+                    margin: auto;
+                }
+
+                #map-sidebar .wvw-bar-server-name {
+                    line-height: 13px;
+                }
+
+                #map-sidebar .wvw-bar-outer td {
+                    padding: 1px 3px;
+                }
+
+                #kd-bar-chart {
+                    margin-top: 16px;
+                    min-height: 175px;
+                }
+
+                #kd-table,
+                #ppt-table {
+                    width: 100%;
+                }
+
+                .map-sidebar-table {
+                    text-align: center;
+                    background-color: #212b30 !important;
+                }
+
+                .map-sidebar-table tbody th {
+                    vertical-align: middle;
+                    line-height: 16px;
+                }
+
+                .map-sidebar-table th,
+                .map-sidebar-table td {
+                    padding: 2px 0 !important;
+                    text-align: center;
+                    color: inherit;
+                    white-space: normal;
+                    min-width: 50px;
+                }
+
+                .map-sidebar-table tr:first-child,
+                .map-sidebar-table tr:last-child {
+                    background-color: #1b2427 !important;
+                }
+
+                .map-sidebar-table tr:last-child {
+                    border-top-style: solid;
+                    border-top-color: #141c1f;
+                }
+
+                .map-sidebar-table tbody tr,
+                .map-sidebar-table tbody td,
+                .map-sidebar-table tbody th {
+                    height: initial;
+                }
+
+                .map-sidebar-table tbody tr:hover {
+                    background: initial;
+                }
+
+                .spacer {
+                    flex-grow: 1
+                }
+
+                #map-sidebar .wvw-canvas-holder2 {
+                    height: 60px;
+                    width: 60px;
+                }
+
+                #map-sidebar .wvw-canvas-holder {
+                    background-size: 66px;
+                    background-position: 0px 0px;
+                    padding: 3px;
+                    position: relative;
+                    display: inline-block;
+                    margin-left: 30px;
+                }
+            </style>
+
+            <div class="page-container sidebar-left sidebar-collapsed-back ui-lock-on-drag fixed-page" style="height: 100%">
+                <div id="map-sidebar" class="mdl-color--blue-grey-900 mdl-color-text--grey-100 mdl-shadow--8dp">
+                    <div class="wvw-component wvw-victory-points sidebar-widget">
+                        <div class="wvw-component-title">
+                            <img class="wvw-label-icon" style="height: 16px;" src="images/victory_point.png" alt="">
+                            <div class="wvw-title">Victory Points</div>
+                        </div>
+                        <table class="wvw-bar-outer">
+                            <tr>
+                                <td>
+                                    <div class="wvw-bar-base mdl-shadow--8dp">
+                                        <div class="wvw-bar-green wvw-bar green-bg"></div>
+                                        <div class="wvw-bar-text-green wvw-bar-server-name"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wvw-number-label-green wvw-label green">-</div>
+                                </td>
+                                <td>
+                                    <div class="wvw-diff-number-green wvw-ppt-number green">-</div>
+                                    <td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="wvw-bar-base mdl-shadow--8dp">
+                                        <div class="wvw-bar-blue wvw-bar blue-bg"></div>
+                                        <div class="wvw-bar-text-blue wvw-bar-server-name"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wvw-number-label-blue wvw-label blue">-</div>
+                                </td>
+                                <td>
+                                    <div class="wvw-diff-number-blue wvw-ppt-number blue">-</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="wvw-bar-base mdl-shadow--8dp">
+                                        <div class="wvw-bar-red wvw-bar red-bg"></div>
+                                        <div class="wvw-bar-text-red wvw-bar-server-name"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wvw-number-label-red wvw-label red">-</div>
+                                </td>
+                                <td>
+                                    <div class="wvw-diff-number-red wvw-ppt-number red">-</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="wvw-component wvw-skirmish-score sidebar-widget">
+                        <div class="wvw-component-title">
+                            <img class="wvw-label-icon" src="images/ppt.png" alt="">
+                            <div class="wvw-title">Skirmish Score</div>
+                        </div>
+                        <table class="wvw-bar-outer">
+                            <tr>
+                                <td>
+                                    <div class="wvw-bar-base mdl-shadow--8dp">
+                                        <div class="wvw-bar-green wvw-bar green-bg"></div>
+                                        <div class="wvw-bar-text-green wvw-bar-server-name"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wvw-number-label-green wvw-label green">-</div>
+                                </td>
+                                <td>
+                                    <div class="wvw-diff-number-green wvw-ppt-number green">-</div>
+                                    <td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="wvw-bar-base mdl-shadow--8dp">
+                                        <div class="wvw-bar-blue wvw-bar blue-bg"></div>
+                                        <div class="wvw-bar-text-blue wvw-bar-server-name"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wvw-number-label-blue wvw-label blue">-</div>
+                                </td>
+                                <td>
+                                    <div class="wvw-diff-number-blue wvw-ppt-number blue">-</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="wvw-bar-base mdl-shadow--8dp">
+                                        <div class="wvw-bar-red wvw-bar red-bg"></div>
+                                        <div class="wvw-bar-text-red wvw-bar-server-name"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wvw-number-label-red wvw-label red">-</div>
+                                </td>
+                                <td>
+                                    <div class="wvw-diff-number-red wvw-ppt-number red">-</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--<div class="sidebar-widget wvw-component">
+                    <div class="wvw-component-title">
+                        <img class="wvw-label-icon" src="images/ppt.png"  alt="">
+                        <div class="wvw-title">Points Per Tick</div>
+                    </div>
+                    <div style="/*display: flex;align-items: center;*/">
+                        <div class="wvw-canvas-holder">
+                            <div class="wvw-canvas-holder2">
+                                <canvas class="wvw-ppt-canvas" width="100" height="100"></canvas>
+                            </div>
+                        </div>
+                        <table id='ppt-table' class="map-sidebar-table mdl-data-table mdl-js-data-table mdl-color-text--grey-100 mdl-shadow--2dp">
+                            <tr>
+                                <td>
+                                    Border
+                                </td>
+                                <th class="green wvw-green-world-name-short">
+                                    Green
+                                </th>
+                                <th class="blue wvw-blue-world-name-short">
+                                    Blue
+                                </th>
+                                <th class="red wvw-red-world-name-short">
+                                    Red
+                                </th>
+                                <td>
+                                    Total
+                                </td>
+                            </tr>
+                            <tr class="wvw-kd-eb-widget">
+                                <td class="eb">
+                                    EB
+                                </td>
+                                <td class="green wvw-kd-green">
+                                    -
+                                </td>
+                                <td class="blue wvw-kd-blue">
+                                    -
+                                </td>
+                                <td class="red wvw-kd-red">
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="wvw-kd-green-widget">
+                                <td class="green">
+                                    Green
+                                </td>
+                                <td class="green wvw-kd-green">
+                                    -
+                                </td>
+                                <td class="blue wvw-kd-blue">
+                                    -
+                                </td>
+                                <td class="red wvw-kd-red">
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="wvw-kd-blue-widget">
+                                <td class="blue">
+                                    Blue
+                                </td>
+                                <td class="green wvw-kd-green">
+                                    -
+                                </td>
+                                <td class="blue wvw-kd-blue">
+                                    -
+                                </td>
+                                <td class="red wvw-kd-red">
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="wvw-kd-red-widget">
+                                <td class="red">
+                                    Red
+                                </td>
+                                <td class="green wvw-kd-green">
+                                    -
+                                </td>
+                                <td class="blue wvw-kd-blue">
+                                    -
+                                </td>
+                                <td class="red wvw-kd-red">
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            <tr class="wvw-kd-total-widget">
+                                <td>
+                                    Total
+                                </td>
+                                <td class="green wvw-kd-green">
+                                    -
+                                </td>
+                                <td class="blue wvw-kd-blue">
+                                    -
+                                </td>
+                                <td class="red wvw-kd-red">
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>-->
+                    <div class="spacer"></div>
+                    <div>
+                        <div class="sidebar-widget" style="margin-bottom: 0;">
+                            <div class="wvw-component-title">
+                                <img class="wvw-label-icon" style="height: 16px;" src="images/kd.png" alt="">
+                                <div class="wvw-title">K/D Distribution</div>
+                            </div>
+                            <canvas id="kd-bar-chart" width="250" height="175"></canvas>
+                        </div>
+                        <div class="sidebar-widget" style="margin-bottom: 0;">
+                            <div class="wvw-component-title" style="margin: 0">
+                                <img class="wvw-label-icon" style="height: 16px;" src="images/kd.png" alt="">
+                                <div class="wvw-title">Kills / Deaths</div>
+                            </div>
+                            <table id='kd-table' class="map-sidebar-table mdl-data-table mdl-js-data-table mdl-color-text--grey-100 mdl-shadow--2dp">
+                                <tr>
+                                    <th>
+                                        Border
+                                    </th>
+                                    <th class="green wvw-green-world-name-short">
+                                        Green
+                                    </th>
+                                    <th class="blue wvw-blue-world-name-short">
+                                        Blue
+                                    </th>
+                                    <th class="red wvw-red-world-name-short">
+                                        Red
+                                    </th>
+                                </tr>
+                                <tr class="wvw-kd-eb-widget">
+                                    <td class="eb">
+                                        Eternal Battlegrounds
+                                    </td>
+                                    <td class="green wvw-kd-green">
+                                        -
+                                    </td>
+                                    <td class="blue wvw-kd-blue">
+                                        -
+                                    </td>
+                                    <td class="red wvw-kd-red">
+                                        -
+                                    </td>
+                                </tr>
+                                <tr class="wvw-kd-green-widget">
+                                    <td class="green">
+                                        Green Border
+                                    </td>
+                                    <td class="green wvw-kd-green">
+                                        -
+                                    </td>
+                                    <td class="blue wvw-kd-blue">
+                                        -
+                                    </td>
+                                    <td class="red wvw-kd-red">
+                                        -
+                                    </td>
+                                </tr>
+                                <tr class="wvw-kd-blue-widget">
+                                    <td class="blue">
+                                        Blue Border
+                                    </td>
+                                    <td class="green wvw-kd-green">
+                                        -
+                                    </td>
+                                    <td class="blue wvw-kd-blue">
+                                        -
+                                    </td>
+                                    <td class="red wvw-kd-red">
+                                        -
+                                    </td>
+                                </tr>
+                                <tr class="wvw-kd-red-widget">
+                                    <td class="red">
+                                        Red Border
+                                    </td>
+                                    <td class="green wvw-kd-green">
+                                        -
+                                    </td>
+                                    <td class="blue wvw-kd-blue">
+                                        -
+                                    </td>
+                                    <td class="red wvw-kd-red">
+                                        -
+                                    </td>
+                                </tr>
+                                <tr class="wvw-kd-total-widget">
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td class="green wvw-kd-green">
+                                        -
+                                    </td>
+                                    <td class="blue wvw-kd-blue">
+                                        -
+                                    </td>
+                                    <td class="red wvw-kd-red">
+                                        -
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <main id="content" class="mdl-layout__content content-full-width">
+                    <div id="ui-widget-layer">
+                        <div id="ui-widget-layer-table">
+                            <div id="north-widgets">
+                                <div id="nl" class="left-panel ui-droppable"></div>
+                                <div id="nr" class="right-panel ui-droppable"></div>
+                                <div id="nw" class="west-panel ui-droppable"></div>
+                                <div id="ne" class="east-panel ui-droppable"></div>
+                            </div>
+
+                            <div id="south-widgets">
+                                <div id="sw" class="west-panel ui-droppable"></div>
+                                <div id="se" class="east-panel ui-droppable"></div>
+                                <div id="sl" class="left-panel ui-droppable"></div>
+                                <div id="sr" class="right-panel ui-droppable"></div>
+                            </div>
+                        </div>
+
+                        <div id="widget-hidden-contianer">
+
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                </main>
+            </div>
+
+
+    </div>
+    </div>
+    </div>
+    </main>
+
+    </div>
+
+    <script type="text/javascript" src="scripts/wvw-map.js"></script>
+    <script type="text/javascript" src="scripts/matchup-fetcher.js"></script>
+    <script type="text/javascript" src="scripts/lib/Chart.min.js"></script>
+    <script type="text/javascript" src="scripts/widget-manager.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js"></script>
+    <script type="text/javascript" defer src="scripts/main.js"></script>
+
+</body>
+
+</html>

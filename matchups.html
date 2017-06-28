@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!DOCTYPE html>
+    <!--
+    The MIT License
+
+    Copyright 2017 Jeppe Boysen Vennekilde.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WvW Live Map</title>
+
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
+    <link type="text/css" rel="stylesheet" href="css/menu-nav.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link type="text/css" rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-indigo.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/utils.js"></script>
+    <script type="text/javascript" src="scripts/nav-helper.js"></script>
+    <script type="text/javascript" src="scripts/menu-nav.js"></script>
+    <script type="text/javascript" src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        /**
+* Copyright 2015 Google Inc. All Rights Reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+        html,
+        body {
+            font-family: 'Roboto', 'Helvetica', sans-serif;
+        }
+
+        .demo-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+        }
+
+        .mdl-layout__drawer .avatar {
+            margin-bottom: 16px;
+        }
+
+        .demo-drawer {
+            border: none;
+        }
+        /* iOS Safari specific workaround */
+
+        .demo-drawer .mdl-menu__container {
+            z-index: -1;
+        }
+
+        .demo-drawer .demo-navigation {
+            z-index: -2;
+        }
+        /* END iOS Safari specific workaround */
+
+        .demo-drawer .mdl-menu .mdl-menu__item {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .demo-drawer-header {
+            box-sizing: border-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            padding: 16px;
+        }
+
+        .demo-avatar-dropdown {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            position: relative;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .demo-navigation {
+            margin-left: 16px !important;
+            /*-webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;*/
+        }
+
+        .demo-layout .demo-navigation .mdl-navigation__link {
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            color: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .demo-layout .demo-navigation .mdl-navigation__link:hover {
+            background-color: #04cd70;
+            /*#00BCD4;*/
+            color: #37474F;
+        }
+
+        .demo-navigation .mdl-navigation__link .material-icons {
+            margin-right: 32px;
+        }
+
+        .demo-content {
+            max-width: 1080px;
+        }
+
+        .demo-charts {
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .demo-chart:nth-child(1) {
+            color: #ACEC00;
+        }
+
+        .demo-chart:nth-child(2) {
+            color: #00BBD6;
+        }
+
+        .demo-chart:nth-child(3) {
+            color: #BA65C9;
+        }
+
+        .demo-chart:nth-child(4) {
+            color: #EF3C79;
+        }
+
+        .demo-graphs {
+            padding: 16px 32px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-align-items: stretch;
+            -ms-flex-align: stretch;
+            align-items: stretch;
+        }
+        /* TODO: Find a proper solution to have the graphs
+     * not float around outside their container in IE10/11.
+     * Using a browserhacks.com solution for now.
+     */
+
+        _:-ms-input-placeholder,
+         :root .demo-graphs {
+            min-height: 664px;
+        }
+
+        _:-ms-input-placeholder,
+         :root .demo-graph {
+            max-height: 300px;
+        }
+        /* TODO end */
+
+        .demo-graph:nth-child(1) {
+            color: #00b9d8;
+        }
+
+        .demo-graph:nth-child(2) {
+            color: #d9006e;
+        }
+
+        .demo-cards {
+            -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -webkit-align-content: flex-start;
+            -ms-flex-line-pack: start;
+            align-content: flex-start;
+        }
+
+        .demo-cards .demo-separator {
+            height: 32px;
+        }
+
+        .demo-cards .mdl-card__title.mdl-card__title {
+            color: white;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .demo-cards ul {
+            padding: 0;
+        }
+
+        .demo-cards h4 {
+            font-size: 1em;
+        }
+
+        .demo-updates .mdl-card__title {
+            min-height: 200px;
+            background-image: url('images/dog.png');
+            background-position: 90% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .demo-cards .mdl-card__actions a {
+            color: #00BCD4;
+            text-decoration: none;
+        }
+
+        .demo-options h4 {
+            margin: 0;
+        }
+
+        .demo-options .mdl-checkbox__box-outline {
+            border-color: rgba(255, 255, 255, 0.89);
+        }
+
+        .demo-options ul {
+            margin: 0;
+            list-style-type: none;
+        }
+
+        .demo-options li {
+            margin: 4px 0;
+        }
+
+        .demo-options .material-icons {
+            color: rgba(255, 255, 255, 0.89);
+        }
+
+        .demo-options .mdl-card__actions {
+            height: 64px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            box-sizing: border-box;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+            padding: 12px 20px;
+        }
+
+        .mdl-layout__header-row {
+            padding: 0 20px 0 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <!-- mdl-layout--fixed-drawer -->
+
+        <header class="demo-header mdl-layout__header mdl-color--blue-grey-900 mdl-color-text--grey-100">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title" style="font-family: gw2;"><span style="font-weight: bold;color: #DC241F;">GW2</span> Placeholder</span>
+
+                <nav class="demo-navigation mdl-navigation">
+                    <a class="mdl-navigation__link" href="index.html"><i class="material-icons" role="presentation">map</i>Live map</a>
+                    <a class="mdl-navigation__link" href="matchups.html"><i class="material-icons" role="presentation">view_list</i>Matchups</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">show_chart</i>Matchup statistics</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons" role="presentation">format_line_spacing</i>Matchup probability</a>
+                </nav>
+                <div class="mdl-layout-spacer"></div>
+                <!--<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" id="search">
+                <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+        </div>-->
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+        </button>
+                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right " for="hdrbtn">
+                    <li class="mdl-menu__item">About</li>
+                    <li class="mdl-menu__item">Contact</li>
+                    <a class="mdl-menu__item" href="legal.html">Legal information</a>
+                </ul>
+            </div>
+        </header>
+
+
+        <main class="mdl-layout__content mdl-color--grey-100">
+            <div class="mdl-grid demo-content">
+                <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                    <div class="mdl-card__supporting-text mdl-color-text--grey-800">
+
+                        <h3>
+                            Legal notice</h3>
+                        <p>This Privacy Policy governs the manner in which GW2 Engine collects, uses, maintains and discloses information collected from users (each, a "User") of the https://vennekilde.github.io website ("Site").</p>
+
+                        <p>© 2015 ArenaNet, LLC. All rights reserved. NCSOFT, the interlocking NC logo, ArenaNet, Guild Wars, Guild Wars Factions, Guild Wars Nightfall, Guild Wars: Eye of the North, Guild Wars 2, Heart of Thorns, and all associated logos
+                            and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.</p>
+
+                        <h4>Personal identification information</h4>
+                        <p>We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, register on the site, fill out a form, and in connection with other activities, services,
+                            features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address. Users may, however, visit our Site anonymously. We will collect personal identification information from Users
+                            only if they voluntarily submit such information to us. Users can always refuse to supply personally identification information, except that it may prevent them from engaging in certain Site related activities.</p>
+
+                        <h4>Non-personal identification information</h4>
+                        <p>We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about
+                            Users means of connection to our Site, such as the operating system and the Internet service providers utilized and other similar information.</p>
+
+                        <h4>Web browser cookies</h4>
+                        <p>Our Site may use "cookies" to enhance User experience. User's web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to
+                            refuse cookies, or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.</p>
+
+                        <h4>How we use collected information</h4>
+                        <p>GW2 Engine may collect and use Users personal information for the following purposes:</p>
+                        <ul>
+                            <li>
+                                <i>To run and operate our Site</i><br/> We may need your information display content on the Site correctly.
+                            </li>
+                            <li>
+                                <i>To improve customer service</i><br/> Information you provide helps us respond to your customer service requests and support needs more efficiently.
+                            </li>
+                            <li>
+                                <i>To personalize user experience</i><br/> We may use information in the aggregate to understand how our Users as a group use the services and resources provided on our Site.
+                            </li>
+                            <li>
+                                <i>To improve our Site</i><br/> We may use feedback you provide to improve our products and services.
+                            </li>
+                            <li>
+                                <i>To send periodic emails</i><br/> We may use the email address to send User information and updates pertaining to their order. It may also be used to respond to their inquiries, questions, and/or other requests.
+                            </li>
+                        </ul>
+
+                        <h4>How we protect your information</h4>
+                        <p>We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction
+                            information and data stored on our Site.</p>
+
+                        <h4>Sharing your personal information</h4>
+                        <p>We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with
+                            our business partners, trusted affiliates and advertisers for the purposes outlined above. </p>
+
+                        <h4>Electronic newsletters</h4>
+                        <p>If User decides to opt-in to our mailing list, they will receive emails that may include company news, updates, related product or service information, etc. If at any time the User would like to unsubscribe from receiving future
+                            emails, we include detailed unsubscribe instructions at the bottom of each email or User may contact us via our Site.</p>
+
+                        <h4>Third party websites</h4>
+                        <p>Users may find advertising or other content on our Site that link to the sites and services of our partners, suppliers, advertisers, sponsors, licensors and other third parties. We do not control the content or links that appear
+                            on these sites and are not responsible for the practices employed by websites linked to or from our Site. In addition, these sites or services, including their content and links, may be constantly changing. These sites and
+                            services may have their own privacy policies and customer service policies. Browsing and interaction on any other website, including websites which have a link to our Site, is subject to that website's own terms and policies.</p>
+
+                        <h4>Changes to this privacy policy</h4>
+                        <p>GW2 Engine has the discretion to update this privacy policy at any time. When we do, we will post a notification on the main page of our Site. We encourage Users to frequently check this page for any changes to stay informed about
+                            how we are helping to protect the personal information we collect. You acknowledge and agree that it is your responsibility to review this privacy policy periodically and become aware of modifications.</p>
+
+                        <h4>Your acceptance of these terms</h4>
+                        <p>By using this Site, you signify your acceptance of this policy. If you do not agree to this policy, please do not use our Site. Your continued use of the Site following the posting of changes to this policy will be deemed your
+                            acceptance of those changes. This privacy policy was built <a href="http://privacypolicies.com/" target="_blank">with the PrivacyPolicies.com generator</a>.</p>
+
+                        <h4>Contacting us</h4>
+                        <p>If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us.</p>
+
+                        <p>This document was last updated on June 24, 2017</p>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</body>
+</html

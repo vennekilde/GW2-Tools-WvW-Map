@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WvW Live Map</title>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="page-container sidebar-collapsed-back ui-lock-on-drag fixed-page">
+        <div id="content">
+            <div id="ui-widget-layer">
+                <div id="ui-widget-layer-table">
+                    <div id="north-widgets">
+                        <div id="nl" class="left-panel ui-droppable"></div>
+                        <div id="nr" class="right-panel ui-droppable"></div>
+                        <div id="nw" class="west-panel ui-droppable"></div>
+                        <div id="ne" class="east-panel ui-droppable"></div>
+                    </div>
+
+                    <div id="south-widgets">
+                        <div id="sw" class="west-panel ui-droppable"></div>
+                        <div id="se" class="east-panel ui-droppable"></div>
+                        <div id="sl" class="left-panel ui-droppable"></div>
+                        <div id="sr" class="right-panel ui-droppable"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <div class="sidebar-menu small-top">
+            <header class="logo">
+                <a href="#" class="sidebar-icon"><span class="fa fa-bars"></span></a>
+                <a href="#">
+                    <!--<span id="logo" class="fa fa-html5 fa-5x"></span> -->
+                    <img id="logo" src="images/wvw.png" alt="Logo" />
+                </a>
+            </header>
+            <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
+            <div class="menu">
+                <ul id="menu">
+                    <li id="menu-home"><a onClick="history.go(0)"><i class="fa fa-home"></i><span>Home</span></a></li>
+                    <li id="menu-comunicacao"><a href="#"><i class="fa fa-anchor"></i><span>Category</span><span class="fa fa-angle-double-right" style="float: right"></span></a>
+                        <ul id="menu-comunicacao-sub">
+                            <li id="menu-mensagens" style="width: 120px"><a href="#">Item 1<i class="fa fa-angle-right" style="float: right; margin-right: -8px; margin-top: 2px;"></i></a>
+                                <ul id="menu-mensagens-sub">
+                                    <li id="menu-mensagens-enviadas"><a href="#">Item 1.1</a></li>
+                                    <li id="menu-mensagens-recebidas"><a href="#">Item 1.2</a></li>
+                                    <li id="menu-mensagens-nova"><a href="#">Item 1.3</a></li>
+                                </ul>
+                            </li>
+                            <li id="menu-arquivos"><a href="#">Item 2</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-envelope"></i><span>About</span><span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="#">Contact us</a></li>
+                            <li id="menu-academico-boletim"><a href="#">About us</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><i class="fa fa-history"></i><span>Blog</span></a></li>
+                    <li><a href="#"><i class="fa fa-gears"></i><span>Settings</span></a></li>
+
+                    <li id="menu-comunicacao" class="menu-toggle-collapsed">
+                        <a href="#" class="menu-toggle"><i class="fa fa-th-large"></i><span>Widgets</span><span class="fa fa-angle-double-right" style="float: right"></span></a>
+                        <div id="inactive-widgets" class="menu-toggle-container ui-droppable">
+                            <div id="wvw-victory-points" class="ui-draggable">
+                                <div class="wvw-score wvw-component">
+                                    <img class="wvw-label-icon" src="images/victory_point.png">
+                                    <div class="wvw-label">Victory Points</div>
+                                    <div class="wvw-score-bar-outer">
+                                        <div class="wvw-score-bar-base">
+                                            <div class="wvw-score-green wvw-score-bar green-bg"></div>
+                                            <div class="wvw-score-bar-text-green wvw-score-bar-server-name"></div>
+                                        </div>
+                                        <div class="wvw-score-label-green wvw-label green">-</div>
+                                    </div>
+                                    <div class="wvw-score-bar-outer">
+                                        <div class="wvw-score-bar-base">
+                                            <div class="wvw-score-blue wvw-score-bar blue-bg"></div>
+                                            <div class="wvw-score-bar-text-blue wvw-score-bar-server-name"></div>
+                                        </div>
+                                        <div class="wvw-score-label-blue wvw-label blue">-</div>
+                                    </div>
+                                    <div class="wvw-score-bar-outer">
+                                        <div class="wvw-score-bar-base">
+                                            <div class="wvw-score-red wvw-score-bar red-bg"></div>
+                                            <div class="wvw-score-bar-text-red wvw-score-bar-server-name"></div>
+                                        </div>
+                                        <div class="wvw-score-label-red wvw-label red">-</div>
+                                    </div>
+                                </div>
+
+                                <div class="wvw-score-difference wvw-component">
+                                    <div class="wvw-label">Difference</div>
+                                    <div class="wvw-score-diff-number-green wvw-ppt-number green">-</div>
+                                    <div class="wvw-score-diff-number-blue wvw-ppt-number blue">-</div>
+                                    <div class="wvw-score-diff-number-red wvw-ppt-number red">-</div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-ppt" class="ui-draggable">
+                                <div class="wvw-component">
+                                    <div class="wvw-label">Point Per Tick</div>
+                                    <div>
+                                        <div class="wvw-canvas-holder">
+                                            <div class="wvw-canvas-holder2">
+                                                <canvas class="wvw-ppt-canvas" width="50" height="50"></canvas>
+                                            </div>
+                                        </div>
+                                        <div style="padding-left: 60px">
+                                            <!--<div class="wvw-label">Tick</div>-->
+                                            <div class="wvw-ppt-number-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-ppt-number-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-ppt-number-red wvw-ppt-number red">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-skirmish-score" class="ui-draggable">
+                                <div class="wvw-component">
+                                    <img class="wvw-label-icon" src="images/ppt.png">
+                                    <div class="wvw-label">Skirmish Score</div>
+                                    <div class="wvw-score-bar-outer">
+                                        <div class="wvw-score-bar-base">
+                                            <div class="wvw-skirmish-number-green wvw-score-bar green-bg"></div>
+                                            <div class="wvw-score-bar-text-green wvw-score-bar-server-name"></div>
+                                        </div>
+                                        <div class="wvw-skirmish-number-label-green wvw-label green">-</div>
+                                    </div>
+                                    <div class="wvw-score-bar-outer">
+                                        <div class="wvw-score-bar-base">
+                                            <div class="wvw-skirmish-number-blue wvw-score-bar blue-bg"></div>
+                                            <div class="wvw-score-bar-text-blue wvw-score-bar-server-name"></div>
+                                        </div>
+                                        <div class="wvw-skirmish-number-label-blue wvw-label blue">-</div>
+                                    </div>
+                                    <div class="wvw-score-bar-outer">
+                                        <div class="wvw-score-bar-base">
+                                            <div class="wvw-skirmish-number-red wvw-score-bar red-bg"></div>
+                                            <div class="wvw-score-bar-text-red wvw-score-bar-server-name"></div>
+                                        </div>
+                                        <div class="wvw-skirmish-number-label-red wvw-label red">-</div>
+                                    </div>
+                                </div>
+
+                                <div class="wvw-score-difference wvw-component">
+                                    <div class="wvw-label">Difference</div>
+                                    <div class="wvw-skirmish-diff-number-green wvw-ppt-number green">-</div>
+                                    <div class="wvw-skirmish-diff-number-blue wvw-ppt-number blue">-</div>
+                                    <div class="wvw-skirmish-diff-number-red wvw-ppt-number red">-</div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-kd-widget" class="ui-draggable wvw-kd-widget">
+                                <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                    <div>
+                                        <img class="wvw-label-icon" src="images/kd.png">
+                                        <div class="wvw-label">Total K/D</div>
+                                    </div>
+                                    <div>
+                                        <div class="wvw-score-diffference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kd-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kd-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kd-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kills-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kills-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kills-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-deaths-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-deaths-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-deaths-red wvw-ppt-number red">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-kd-eb-widget" class="ui-draggable wvw-kd-widget">
+                                <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                    <div>
+                                        <img class="wvw-label-icon" src="images/kd.png">
+                                        <div class="wvw-label">Eternal Battlegrounds K/D</div>
+                                    </div>
+                                    <div>
+                                        <div class="wvw-score-diffference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kd-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kd-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kd-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kills-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kills-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kills-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-deaths-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-deaths-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-deaths-red wvw-ppt-number red">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-kd-green-widget" class="ui-draggable wvw-kd-widget">
+                                <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                    <div>
+                                        <img class="wvw-label-icon" src="images/kd.png">
+                                        <div class="wvw-label">Green Border K/D</div>
+                                    </div>
+                                    <div>
+                                        <div class="wvw-score-diffference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kd-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kd-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kd-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kills-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kills-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kills-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-deaths-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-deaths-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-deaths-red wvw-ppt-number red">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-kd-red-widget" class="ui-draggable wvw-kd-widget">
+                                <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                    <div>
+                                        <img class="wvw-label-icon" src="images/kd.png">
+                                        <div class="wvw-label">Red Border K/D</div>
+                                    </div>
+                                    <div>
+                                        <div class="wvw-score-diffference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kd-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kd-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kd-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kills-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kills-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kills-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-deaths-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-deaths-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-deaths-red wvw-ppt-number red">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="wvw-kd-blue-widget" class="ui-draggable wvw-kd-widget">
+                                <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                    <div>
+                                        <img class="wvw-label-icon" src="images/kd.png">
+                                        <div class="wvw-label">Blue Border K/D</div>
+                                    </div>
+                                    <div>
+                                        <div class="wvw-score-diffference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kd-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kd-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kd-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-kills-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-kills-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-kills-red wvw-ppt-number red">-</div>
+                                        </div>
+                                        <div class="wvw-score-difference wvw-component" style="min-width: 56px;">
+                                            <div class="wvw-deaths-green wvw-ppt-number green">-</div>
+                                            <div class="wvw-deaths-blue wvw-ppt-number blue">-</div>
+                                            <div class="wvw-deaths-red wvw-ppt-number red">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="menu-footer">
+                <a href="#"><i class="fa fa-gavel" style="margin-right: 5px"></i><span>Legal Notice</span></span></a>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/utils.js"></script>
+    <script type="text/javascript" src="scripts/menu-nav.js"></script>
+    <script type="text/javascript" src="scripts/wvw-map.js"></script>
+    <script type="text/javascript" src="scripts/lib/Chart.min.js"></script>
+    <script type="text/javascript" src="scripts/widget-manager.js"></script>
+    <script type="text/javascript" src="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js"></script>
+    <script type="text/javascript" defer src="scripts/main.js"></script>
+</body>
+
+</html>

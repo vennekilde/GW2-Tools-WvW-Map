@@ -68,7 +68,6 @@ function WvWMap() {
             zoomControl: false,
             attributionControl: false,
         });
-        self.map.setView(self._unproject([10450, 12500]), minZoom);
         
         
 
@@ -85,12 +84,16 @@ function WvWMap() {
 
 
         // Define viewable area
-        var borderNE = self._unproject([16700, 8900]);
-        var borderSW = self._unproject([4200, 15900]);
+        var borderNE = self._unproject([15700, 8900]);
+        var borderSW = self._unproject([5100, 15900]);
         var bounds = new L.LatLngBounds(borderNE, borderSW);
 
         //Set bounds
         self.map.setMaxBounds(bounds);
+        self.map.setView(new L.LatLng(
+                (borderNE.lat - borderSW.lat) / 2, 
+                (borderNE.lng - borderSW.lng) / 2), 
+            minZoom);
 
         //map.fitBounds(bounds);
 
@@ -104,7 +107,7 @@ function WvWMap() {
             L.marker(borderSW, {title: "sw"}).addTo(self.map);
             L.marker(borderNE, {title: "ne"}).addTo(self.map);
             L.marker(self.map.getCenter(), {title: "center"}).addTo(self.map);
-            var borderSE = self._unproject([16700, 15900]);
+            var borderSE = new L.LatLng(borderSW.lat, borderNE.lng);
             L.marker(borderSE, {title: "se"}).addTo(self.map);
 
             self.map.on("click", (self._onMapClick).bind(this));

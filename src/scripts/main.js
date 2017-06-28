@@ -25,7 +25,11 @@ ga('send', 'pageview');
 //Attempt to identify installed web path
 var scripts = document.getElementsByTagName('script');
 var path = this.scripts[this.scripts.length - 1].src.split('?')[0];      // remove any ?query
-var installDirectory = this.path.split('/').slice(0, -1).join('/') + '/';  // remove last filename part of path
+var installDirectory = this.path.split('/').slice(0, -2).join('/') + '/';  // remove last filename part of path
+
+var webConfig = {
+    implicitExtensions: false
+};
 
 var wvwMapConfig = {
     world: 2007,

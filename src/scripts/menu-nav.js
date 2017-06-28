@@ -37,14 +37,10 @@ function toggleMenu(toggle) {
     {
         $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
         $("#menu span").css({"position": "absolute"});
-        $(".sidebar-menu").css({"overflow": "hidden"});
     } else
     {
         $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
         $("#menu span").css({"position": "relative"});
-        setTimeout(function(){
-            $(".sidebar-menu").css({"overflow": "auto"});
-        }, 200);
     }
     
     // Create the event

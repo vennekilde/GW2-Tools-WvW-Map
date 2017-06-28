@@ -9,7 +9,18 @@
     "browser"
   ],
   "author": "Jeppe Boysen Vennekilde",
+  "license": "MIT",
   "contributors": [],
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "grunt-bake": "^1.8.0",
+    "grunt-config": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-html-build": "^0.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vennekilde/GW2-Tools-WvW-Map.git"
+  }
 }

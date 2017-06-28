@@ -1,8 +1,9 @@
 # Netbeans
-nbproject/
+nbproject/private/
 build/
 nbbuild/
 dist/
+dev/
 nbdist/
 .nb-gradle/
 
@@ -10,6 +11,5 @@ nbdist/
 bower_components
 
 node_modules
-tmp
 
 .idea/

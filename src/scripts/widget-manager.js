@@ -7,6 +7,7 @@
 
 function WidgetManager(){
     var self = this;
+    var draggedParent;
     
     self.init = function(){
         self.setupDraggables();
@@ -18,15 +19,23 @@ function WidgetManager(){
             containment: "body",
             connectToSortable: ".ui-droppable",
             appendTo: 'body',
-            revert: 'invalid',
-            refreshPositions: true,
+            refreshPositions: false,
             start: function(event, ui){
                 $( ".ui-droppable" ).addClass("ui-droppable-active");
                 $( "#ui-widget-layer" ).addClass("ui-active");
+                $( ".ui-lock-on-drag" ).addClass("ui-lock");
+                self.draggedParent = $(this).parent()[0];
+                console.log("start")
             },
             stop: function(event, ui){
                 $( ".ui-droppable" ).removeClass("ui-droppable-active");
                 $( "#ui-widget-layer" ).removeClass("ui-active");
+                $( ".ui-lock-on-drag" ).removeClass("ui-lock");
+                self.draggedParent = null;
+                $(this).css("top","");
+                $(this).css("left","");
+                $(this).css("position","");
+                console.log("stop")
                 //setCookie(event.target.id, JSON.stringify(ui.position), 9999);
             }
         });
@@ -48,23 +57,27 @@ function WidgetManager(){
             containment: "body",
             tolerance: "pointer",
             appendTo: 'body',
-            scroll: false,
-            start: function(e, ui){
+            start: function(event, ui){
+                var draggable = $(ui.item[0]);
+                var sortable = $(this)[0];
+                console.log(sortable.id + " --- " + self.draggedParent.id);
                 ui.placeholder.height(ui.item.height());
+                if(self.draggedParent && sortable.id !== self.draggedParent.id){
+                    draggable.appendTo(self.draggedParent);
+                    console.log("fixed");
+                }
             },
-            over : function(){
+            over : function(event, ui){
                 $(this).addClass('ui-widget-drop-hover');
             },
-            out : function(){
+            out : function(event, ui){
                 $(this).removeClass('ui-widget-drop-hover');
             },
             stop: function (event, ui) {
                 $( ".ui-droppable" ).each(function(){
                     //Use replace []= to - due to - being somewhat wonky with sortable serialize
-                    console.log(this);
                     var data = $(this).sortable('serialize').replace(/\[\]=/g,"-");
                     var id = "droppable-" + this.id;
-                    console.log(data);
                     setCookie(id, data, 9999);
                 });
             }
@@ -82,6 +95,8 @@ function WidgetManager(){
                 }
             }
         });
+        
+        $("#widget-hidden-contianer").children().appendTo("#inactive-widgets");
     };
     
     

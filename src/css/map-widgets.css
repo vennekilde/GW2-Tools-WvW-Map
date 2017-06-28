@@ -20,6 +20,8 @@ and open the template in the editor.
     position: relative;
     vertical-align: top; /* here */
     text-align: left;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 .wvw-spacer {
@@ -38,11 +40,11 @@ and open the template in the editor.
     display: inline-block;
     height: 10px;
 }
-.wvw-score-bar-outer .wvw-label {
+.wvw-bar-outer .wvw-label {
     display: inline-block;
 }
 .wvw-canvas-holder {
-    background-image: url(images/blackGlobe.png);
+    background-image: url(../images/blackGlobe.png);
 }
 .wvw-canvas-holder {
     position: absolute;
@@ -81,14 +83,14 @@ and open the template in the editor.
     min-width: 24px;
 }
 
-.wvw-score-bar-outer {
+.wvw-bar-outer {
     position: relative;
 }
 
-.wvw-score-bar-base, .wvw-score-bar {
+.wvw-bar-base, .wvw-bar {
     color: gray;
 }
-.wvw-score-bar-base {
+.wvw-bar-base {
     background-color: gray;
     border-radius: 3px;
     height: 11px;
@@ -99,17 +101,17 @@ and open the template in the editor.
     display: inline-block;
     position: relative
 }
-.wvw-score-bar{
+.wvw-bar{
     height: 11px;
     border-radius: 3px;
 }
-.wvw-score-bar {
+.wvw-bar {
     width: 0px;
 }
-.wvw-score-bar {
+.wvw-bar {
     /*float: right;*/
 }
-.wvw-score-bar-server-name {
+.wvw-bar-server-name {
     position: absolute;
     line-height: 10px;
     color: white;
@@ -119,27 +121,45 @@ and open the template in the editor.
     z-index: 100;
     top: 0;
 }
-.wvw-score-bar-server-name {
+.wvw-bar-server-name {
     left: 3px;
 }
 
 .red {
-    color: #dc4339;
-}
-.red-bg {
-    background-color: #B02822;
-}
-
-.blue-bg {
-    background-color: #1A4DA1;
+    color: #dc4339 !important;
 }
 .blue {
-    color: #4f83da;
+    color: #4f83da !important;
+}
+.green {
+    color: #04a81e !important;
+}
+.eb {
+    color: #d631d8 !important;
 }
 
-.green {
-    color: #04a81e;
+.red-bg {
+    background-color: #B02822 !important;
+}
+.blue-bg {
+    background-color: #1A4DA1 !important;
 }
 .green-bg {
-    background-color: #1E7B2D;
+    background-color: #1E7B2D !important;
+}
+.eb-bg {
+    background-color: #7a1e7b !important;
+}
+
+.red-border {
+    border-color: #B02822 !important;
+}
+.blue-border {
+    border-color: #1A4DA1 !important;
+}
+.green-border {
+    border-color: #1E7B2D !important;
+}
+.eb-border {
+    border-color: #7a1e7b !important;
 }

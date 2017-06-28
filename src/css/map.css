@@ -7,31 +7,6 @@ and open the template in the editor.
     Created on : Jun 6, 2017, 12:31:57 AM
     Author     : Jeppe Boysen Vennekilde
 */
-.clearfix:after {
-  visibility: hidden;
-  display: block;
-  content: "";
-  clear: both;
-  height: 0;
-}
-* html .clearfix             { zoom: 1; } /* IE6 */
-*:first-child+html .clearfix { zoom: 1; } /* IE7 */
-
-html {
-    height: 100%;
-}
-body{
-    margin: 0;
-    height: 100%;
-    
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-}
-div {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
 
 .leaflet-container {
     background: #ffffff;
@@ -76,10 +51,9 @@ div {
     cursor: -webkit-grab;
     background: rgba(26, 50, 54, 0.9);
     padding: 5px 6px;
-    border-radius: 4px;
     height: 74px;
     position: relative;
-    width: auto !important;
+    text-align: left;
     /*visibility: hidden;*/
 }
 north-widgets .ui-sortable-placeholder, 
@@ -100,6 +74,9 @@ south-widgets .ui-sortable-placeholder{
 }
 #ui-widget-layer.ui-active{
     z-index: 890;
+}
+.ui-lock{
+    overflow: hidden;
 }
 .ui-widget-drop-hover{
     background: rgba(0, 255, 78, 0.38);
@@ -123,7 +100,6 @@ south-widgets .ui-sortable-placeholder{
 
 #inactive-widgets{
     width: 100%;
-    float: left;
     background: rgba(0,0,0,0.2);
 }
 #inactive-widgets.ui-droppable-active{
@@ -231,6 +207,10 @@ south-widgets .ui-sortable-placeholder{
     width: 100%;
     padding-top: 74px;
 }
+.wvw-kd-widget {
+    height: 74px;
+    width: 208px;
+}
 
 
 .wvw-obj-marker .www-obj-badge{    
@@ -308,21 +288,21 @@ south-widgets .ui-sortable-placeholder{
     position: absolute;
     top: -3px;
     left: 0px;
-    background-image: url(images/wvw_shield.png);
+    background-image: url(../images/wvw_shield.png);
     background-size: 100%;
 }
 .wvw-shield-2 {
     position: absolute;
     top: -6px;
     left: 8px;
-    background-image: url(images/wvw_shield.png);
+    background-image: url(../images/wvw_shield.png);
     background-size: 100%;
 }
 .wvw-shield-3 {
     position: absolute;
     top: -3px;
     left: 16px;
-    background-image: url(images/wvw_shield.png);
+    background-image: url(../images/wvw_shield.png);
     background-size: 100%;
 }
 .wvw-waypoint {
@@ -331,14 +311,14 @@ south-widgets .ui-sortable-placeholder{
     position: absolute;
     bottom: -5px;
     left: -5px;
-    background-image: url(images/waypoint.png);
+    background-image: url(../images/waypoint.png);
     background-size: 100%;
 }
 
 .wvw-guild-icon-marker {
     position: absolute;
-    bottom: -10px;
-    right: -6px;
+    bottom: -5px;
+    right: -5px;
 }
 .wvw-guild-icon-marker img{
     width: 12px;
@@ -347,7 +327,8 @@ south-widgets .ui-sortable-placeholder{
     font-size: 16px;
     color: #e2b242;
     vertical-align: middle;
-    width: 99%;
+    width: 99%;    
+    white-space: nowrap;
 }
 .claimed-by-img{
     width: 64px;
@@ -362,9 +343,13 @@ south-widgets .ui-sortable-placeholder{
     width: 100%;
     padding-right: 8px;
 }
-.wvw-marker-popup-details, .claimed-by-img{
-    display: inline-table;
+.wvw-marker-popup-details, .claimed-by-img{    
+    display: table-cell;
     vertical-align: top;
+    white-space: nowrap;
+}
+.wvw-marker-popup-details{
+    width: 99%;
 }
 .popup-detail{
     padding-bottom: 2px;
@@ -397,7 +382,7 @@ south-widgets .ui-sortable-placeholder{
     background: #b5b5b5
 }
 .tier-bar-progress{
-    background: url(images/progress-bar.png);
+    background: url(../images/progress-bar.png);
 }
 
 .obj-tier-1{
@@ -416,7 +401,7 @@ south-widgets .ui-sortable-placeholder{
 .yaks-delivered, .objective-ppt{
     display: inline-block;
     height: 16px;
-    margin-top: 2px;
+    vertical-align: baseline;
 }
 .yaks-delivered-label, .objective-ppt-label{
     /*position: absolute;
@@ -463,4 +448,22 @@ south-widgets .ui-sortable-placeholder{
 }
 #wvw-kd-green-widget{
     border-color: #1E7B2D;
+}
+#widget-hidden-contianer{
+    display: none;
+}
+
+#content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+#map-sidebar{
+    width: 250px;
+    height: calc(100% - 64px);
+    position: fixed;
+    z-index: 100;
+    display: flex; 
+    flex-direction: column;
+    overflow: auto;
 }

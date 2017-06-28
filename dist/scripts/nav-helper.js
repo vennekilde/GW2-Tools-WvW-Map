@@ -1,0 +1,1 @@
+navigateToPage=function(i){var n=installDirectory+i;!webConfig.implicitExtensions&&i&&(n+=".html"),window.location.href=n};
